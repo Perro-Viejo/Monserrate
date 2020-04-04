@@ -1,11 +1,12 @@
 extends Node
 
 # ░░░░ ESCENAS ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-enum Scene { MENU, HOME, DOWNTOWN }
+enum Scene { MENU, HOME, DOWNTOWN, STORE }
 const Scenes: Dictionary = {
 	MENU = 'Menu',
 	HOME = 'Home',
-	DOWNTOWN = 'Downtown'
+	DOWNTOWN = 'Downtown',
+	STORE = 'Store'
 }
 
 # ░░░░ DIRECCIÓN FLECHAS ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

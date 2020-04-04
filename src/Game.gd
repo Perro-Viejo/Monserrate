@@ -3,6 +3,7 @@ extends Node2D
 # Controla lo que pasa en el juego y se encarga de cargar escenas.
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(ConstantsMgr.Scene) var initial_scene = ConstantsMgr.Scene.MENU
+export (int) var funds = 5000
 
 var _current_scene: Node
 

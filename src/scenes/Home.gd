@@ -2,6 +2,8 @@ class_name Home
 extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 # TODO: Llenar esto de variables una gonorrea
+export (int) var days_left = 3
+
 var playing_action = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready():
@@ -30,4 +32,8 @@ func _on_button_down(object: String) -> void:
 func _on_stream_finished(source, sound):
 	playing_action = false
 	if sound == 'Switch':
-		EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
+		if not days_left == 0:
+			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
+			days_left -= 1
+		else:
+			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.STORE)

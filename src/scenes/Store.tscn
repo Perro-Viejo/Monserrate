@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/sprites/TEMP/Store.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/TEMP/Gift_01.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/TEMP/Gift_03.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/TEMP/Gift_02.png" type="Texture" id=4]
+[ext_resource path="res://src/scenes/Store.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+bg_color = Color( 0.556863, 0.533333, 0.592157, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://assets/fonts/Tickets to Elton John.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = SubResource( 2 )
+
+[node name="Store" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Fondo" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Price_01" type="Label" parent="."]
+margin_left = 250.558
+margin_top = 99.2456
+margin_right = 320.558
+margin_bottom = 138.246
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "$5.000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_02" type="Label" parent="."]
+margin_left = 97.5884
+margin_top = 164.898
+margin_right = 167.588
+margin_bottom = 203.898
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "$15.000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_03" type="Label" parent="."]
+margin_left = 110.667
+margin_top = 22.7336
+margin_right = 185.667
+margin_bottom = 61.7336
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "$30.000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gift_01" type="TextureButton" parent="."]
+margin_left = 250.558
+margin_top = 16.2456
+margin_right = 325.558
+margin_bottom = 99.2456
+texture_normal = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gift_02" type="TextureButton" parent="."]
+margin_left = 186.2
+margin_top = 104.972
+margin_right = 293.2
+margin_bottom = 185.972
+rect_rotation = 25.6918
+rect_scale = Vector2( 1.2, 1.2 )
+texture_normal = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gift_03" type="TextureButton" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
