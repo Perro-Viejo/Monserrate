@@ -12,4 +12,4 @@ func _ready() -> void:
 
 
 func show_keys() -> void:
-	_keys_to_press.show()
+	_keys_to_press.start()

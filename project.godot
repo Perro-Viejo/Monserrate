@@ -23,11 +23,23 @@ _global_script_classes=[ {
 "class": "Home",
 "language": "GDScript",
 "path": "res://src/scenes/Home.gd"
+}, {
+"base": "TextureProgress",
+"class": "Key",
+"language": "GDScript",
+"path": "res://src/gui/key/Key.gd"
+}, {
+"base": "CenterContainer",
+"class": "KeyToPress",
+"language": "GDScript",
+"path": "res://src/gui/KeysToPress.gd"
 } ]
 _global_script_class_icons={
 "GUI": "",
 "Game": "",
-"Home": ""
+"Home": "",
+"Key": "",
+"KeyToPress": ""
 }
 
 [application]
@@ -42,10 +54,20 @@ config/icon="res://icon.png"
 EventsMgr="*res://src/managers/EventsManager.gd"
 ConstantsMgr="*res://src/managers/ConstantsManager.gd"
 
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=320
 window/size/height=240
+window/size/test_width=640
+window/size/test_height=480
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [rendering]
 
