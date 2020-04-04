@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
-[ext_resource path="res://src/scenes/Home.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scenes/Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gui/GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/managers/AudioManager.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,3 +14,7 @@ initial_scene = ExtResource( 2 )
 [node name="SceneContainer" type="Node2D" parent="World"]
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
+
+[node name="AudioManager" parent="." instance=ExtResource( 4 )]
+
+[node name="Timer" type="Timer" parent="."]

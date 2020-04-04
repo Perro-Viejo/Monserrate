@@ -4,7 +4,7 @@ extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(PackedScene) var initial_scene
 
-var _current_scene: Node2D
+var _current_scene: Node
 
 onready var scene_container: Node2D = $World/SceneContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
@@ -14,7 +14,7 @@ func _ready() -> void:
 		scene_container.add_child(_current_scene)
 	
 	# Conectar escuchadores de señal
-	EventsManager.connect('scene_changed', self, 'change_scene')
+	EventsMgr.connect('scene_changed', self, 'change_scene')
 
 
 func change_scene(id: String) -> void:

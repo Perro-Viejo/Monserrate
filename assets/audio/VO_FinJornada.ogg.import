@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_FinJornada.ogg-67dc4a6752432f61b9cfe5b87b0317fd.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_FinJornada.ogg"
+dest_files=[ "res://.import/VO_FinJornada.ogg-67dc4a6752432f61b9cfe5b87b0317fd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

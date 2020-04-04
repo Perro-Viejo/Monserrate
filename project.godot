@@ -39,7 +39,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-EventsManager="*res://src/managers/EventsManager.gd"
+EventsMgr="*res://src/managers/EventsManager.gd"
+ConstantsMgr="*res://src/managers/ConstantsManager.gd"
 
 [display]
 

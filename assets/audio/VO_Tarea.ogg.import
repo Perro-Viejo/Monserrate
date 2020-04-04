@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_Tarea.ogg-c5dd83c63b42657d4d026a94a0bb9199.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_Tarea.ogg"
+dest_files=[ "res://.import/VO_Tarea.ogg-c5dd83c63b42657d4d026a94a0bb9199.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

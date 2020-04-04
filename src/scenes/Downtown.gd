@@ -3,4 +3,4 @@ extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	# Decirle a la GUI que muestre las teclas a presionar.
-	EventsManager.emit_signal('keys_required')
+	EventsMgr.emit_signal('keys_required')

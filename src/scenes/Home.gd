@@ -11,6 +11,14 @@ func _ready():
 
 
 func _on_button_down(object: String) -> void:
-	print(object)
-	if object == 'Switch':
-		EventsManager.emit_signal('scene_changed', 'Street')
+	match object:
+		'Cepillo':
+			EventsMgr.emit_signal('play_requested', 'VO', 'Cepillo')
+		'Control':
+			EventsMgr.emit_signal('play_requested', 'VO', 'Tv')
+		'Tarea':
+			EventsMgr.emit_signal('play_requested', 'VO', 'Tarea')
+		'Switch':
+			EventsMgr.emit_signal('play_requested', 'VO', 'Switch')
+			yield(get_tree().create_timer(1.8), 'timeout')
+			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
