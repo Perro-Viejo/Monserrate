@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/world/pedestrian-woman-01.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/pedestrian/Pedestrian.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/world/emotes.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 52 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 120 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -18,13 +24,59 @@ region = Rect2( 64, 0, 64, 120 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "Look",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ) ],
 "loop": true,
-"name": "default",
+"name": "Walk",
 "speed": 2.0
 } ]
 
-[node name="Pedestrian" type="KinematicBody2D"]
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 80, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 80, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "Heart",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "Sad",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ) ],
+"loop": true,
+"name": "Happy",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "Angry",
+"speed": 5.0
+} ]
+
+[node name="Pedestrian" type="Area2D"]
+input_pickable = false
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -32,7 +84,14 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
-frame = 3
+animation = "Walk"
+frame = 4
 playing = true
+
+[node name="Emoticon" type="AnimatedSprite" parent="."]
+position = Vector2( 16, -80 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 8 )
+animation = "Happy"
 
 [node name="Tween" type="Tween" parent="."]

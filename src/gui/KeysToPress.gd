@@ -5,6 +5,8 @@ export(ConstantsMgr.Step) var fix_step = ConstantsMgr.Step.RND
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func start() -> void:
+	if is_visible(): return
+	
 	show()
 	
 	# Seleccionar el patrón de movimientos

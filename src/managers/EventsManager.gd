@@ -6,7 +6,7 @@ extends Node
 signal scene_changed(id)
 
 # ░░░░ GUI ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-signal keys_required()
+signal coin_inserted()
 
 # ░░░░ AUDIO MANAGER ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 signal play_requested(source, sound)

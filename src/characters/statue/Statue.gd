@@ -1,15 +1,5 @@
-class_name GUI
-extends CanvasLayer
+extends Area2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
-onready var _keys_to_press: CenterContainer = $Control/KeysToPress
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
-	# Poner estado por defecto a las cosas
-	_keys_to_press.hide()
-	
-	# Conectar escuchadores de señales
-	EventsMgr.connect('coin_inserted', self, 'show_keys')
-
-
-func show_keys() -> void:
-	_keys_to_press.start()
+	pass

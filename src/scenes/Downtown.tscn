@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/scenes/Downtown.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/TEMP/Street.png" type="Texture" id=2]
+[ext_resource path="res://src/characters/statue/Statue.tscn" type="PackedScene" id=3]
 
 [node name="Downtown" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,6 +11,9 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 centered = false
+
+[node name="Statue" parent="." instance=ExtResource( 3 )]
+position = Vector2( 89, 113.5 )
 
 [node name="Pedestrians" type="Node2D" parent="."]
 position = Vector2( -64, 180 )
