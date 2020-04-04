@@ -1,6 +1,7 @@
-extends Node2D
+class_name GUI
+extends CanvasLayer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
-	# Decirle a la GUI que muestre las teclas a presionar.
-	EventsManager.emit_signal('keys_required')
+	# Conectar escuchadores de señales
+	EventsManager.connect('keys_required', self, 'show_keys')

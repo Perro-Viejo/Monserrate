@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CanvasLayer",
+"class": "GUI",
+"language": "GDScript",
+"path": "res://src/gui/GUI.gd"
+}, {
 "base": "Node2D",
 "class": "Game",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://src/scenes/Home.gd"
 } ]
 _global_script_class_icons={
+"GUI": "",
 "Game": "",
 "Home": ""
 }
