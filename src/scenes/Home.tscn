@@ -6,7 +6,9 @@
 [ext_resource path="res://assets/sprites/TEMP/Calendario.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/TEMP/Switch.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/TEMP/Tarea.png" type="Texture" id=6]
-[ext_resource path="res://Home.gd" type="Script" id=7]
+[ext_resource path="res://src/scenes/Home.gd" type="Script" id=7]
+
+
 
 [node name="Home" type="Node2D"]
 script = ExtResource( 7 )

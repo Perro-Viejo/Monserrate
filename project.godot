@@ -8,15 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Game",
+"language": "GDScript",
+"path": "res://src/Game.gd"
+}, {
+"base": "Node2D",
+"class": "Home",
+"language": "GDScript",
+"path": "res://src/scenes/Home.gd"
+} ]
 _global_script_class_icons={
-
+"Game": "",
+"Home": ""
 }
 
 [application]
 
 config/name="Monserrate"
+config/description="Un juego sobra una estatua humana para el Stayhome GameJam, representa la informalidad laboral."
+run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+EventsManager="*res://src/managers/EventsManager.gd"
 
 [display]
 
