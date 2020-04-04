@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_KeyDone_01.ogg-d19b856fbcb5ec1962c0342afcd102ea.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_KeyDone_01.ogg"
+dest_files=[ "res://.import/VO_KeyDone_01.ogg-d19b856fbcb5ec1962c0342afcd102ea.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

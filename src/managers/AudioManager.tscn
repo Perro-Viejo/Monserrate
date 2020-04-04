@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada.ogg" type="AudioStream" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://assets/audio/VO_Casi_01.ogg" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/VO_Casi_02.ogg" type="AudioStream" id=8]
 [ext_resource path="res://src/Audio/RandomTool.gd" type="Script" id=9]
+[ext_resource path="res://assets/audio/VO_KeyDone_02.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/audio/VO_KeyDone_03.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/audio/VO_KeyDone_01.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/audio/VO_KeyDone_04.ogg" type="AudioStream" id=13]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -38,3 +42,18 @@ stream = ExtResource( 7 )
 
 [node name="Casi_02" type="AudioStreamPlayer" parent="VO/Casi"]
 stream = ExtResource( 8 )
+
+[node name="KeyDone" type="Node2D" parent="VO"]
+script = ExtResource( 9 )
+
+[node name="KeyDone_01" type="AudioStreamPlayer" parent="VO/KeyDone"]
+stream = ExtResource( 12 )
+
+[node name="KeyDone_02" type="AudioStreamPlayer" parent="VO/KeyDone"]
+stream = ExtResource( 10 )
+
+[node name="KeyDone_03" type="AudioStreamPlayer" parent="VO/KeyDone"]
+stream = ExtResource( 11 )
+
+[node name="KeyDone_04" type="AudioStreamPlayer" parent="VO/KeyDone"]
+stream = ExtResource( 13 )

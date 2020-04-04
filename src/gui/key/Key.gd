@@ -94,6 +94,7 @@ func set_current_state(state: int) -> void:
 func key_press_done(object: Object, key: NodePath) -> void:
 	self._current_state = States.INACTIVE
 	can_play = true
+	EventsMgr.emit_signal('play_requested','VO', 'KeyDone')
 	emit_signal('done', self)
 
 
