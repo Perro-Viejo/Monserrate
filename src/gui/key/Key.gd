@@ -15,7 +15,7 @@ var can_play = true
 
 var _target_action: String = ''
 var _first_press_done: bool = false
-var _keeps_pressing: bool = false
+var _was_pressing: bool = false
 var _current_state: int = States.WAITING setget set_current_state
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _init() -> void:
@@ -43,40 +43,23 @@ func _ready() -> void:
 			_target_action = 'ui_down'
 	
 	# Conectar escuchadores de señales
-	$Tween.connect('tween_completed', self, 'key_press_done')
-
-
-func _process(delta: float) -> void:
-	if not _current_state == States.ACTIVE: return
-	if _keeps_pressing and not Input.is_action_pressed(_target_action):
-		# Si ya estaba presionando y dejó de presionar
-		_keeps_pressing = false
-		$Tween.stop(self, 'value')
+	$Tween.connect('tween_step', self, 'tween_step')
+	$Tween.connect('tween_completed', self, 'tween_completed')
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if not _current_state == States.ACTIVE: return
+	
 	if event.is_action(_target_action):
 		if not _first_press_done:
 			_first_press_done = true
 			
-			$Tween.interpolate_property(
-				self,
-				'value',
-				self.value,
-				0,
-				press_time,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN
-			)
-			$Tween.start()
-			
+			start_tween(self.value, 0)
 		else:
 			if value <= 15 && can_play:
 				EventsMgr.emit_signal('play_requested','VO', 'Casi')
 				can_play = false
-			_keeps_pressing = true
-			$Tween.resume(self, 'value')
+			_was_pressing = true
 
 
 func set_current_state(state: int) -> void:
@@ -91,12 +74,43 @@ func set_current_state(state: int) -> void:
 			modulate = Color(1.0, 1.0, 1.0, 0.2)
 
 
-func key_press_done(object: Object, key: NodePath) -> void:
-	self._current_state = States.INACTIVE
-	can_play = true
-	EventsMgr.emit_signal('play_requested','VO', 'KeyDone')
-	emit_signal('done', self)
+func tween_step(obj: Object, key: NodePath, elapsed: float, val: float) -> void:
+	if not _current_state == States.ACTIVE:
+		$Tween.remove(self, 'value')
+		return
+	
+	if _was_pressing and not Input.is_action_pressed(_target_action):
+		# Si ya estaba presionando y dejó de presionar
+		_was_pressing = false
+		_first_press_done = false
+		
+		$Tween.stop(self, 'value')
+		$Tween.remove(self, 'value')
+		
+		# Cambiar el tween para que ahora vaya en dirección contraria
+		start_tween(val, 100.0)
+
+
+func tween_completed(obj: TextureProgress, key: NodePath) -> void:
+	if self.value == 0:
+		self._current_state = States.INACTIVE
+		can_play = true
+		EventsMgr.emit_signal('play_requested','VO', 'KeyDone')
+		emit_signal('done', self)
+	elif self.value == 100.0:
+		# Volvió al inicio, ¿Qué hacer?
+		print('( ~_~ )')
 
 
 func set_active() -> void:
 	self._current_state = States.ACTIVE
+
+
+func start_tween(i: float, f: float) -> void:
+	var t: float = (i * press_time) / 100.0
+	
+	if f > i:
+		t = press_time / (i * 0.3)
+	
+	$Tween.interpolate_property(self, 'value', i, f, t, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.start()
