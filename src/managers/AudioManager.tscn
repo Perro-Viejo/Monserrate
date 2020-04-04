@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada.ogg" type="AudioStream" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://assets/audio/VO_Tv.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/audio/VO_Cepillo.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/VO_Tarea.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/audio/VO_Casi_01.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/audio/VO_Casi_02.ogg" type="AudioStream" id=8]
+[ext_resource path="res://src/Audio/RandomTool.gd" type="Script" id=9]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,3 +29,12 @@ stream = ExtResource( 6 )
 
 [node name="Tv" type="AudioStreamPlayer" parent="VO"]
 stream = ExtResource( 4 )
+
+[node name="Casi" type="Node2D" parent="VO"]
+script = ExtResource( 9 )
+
+[node name="Casi_01" type="AudioStreamPlayer" parent="VO/Casi"]
+stream = ExtResource( 7 )
+
+[node name="Casi_02" type="AudioStreamPlayer" parent="VO/Casi"]
+stream = ExtResource( 8 )

@@ -11,6 +11,8 @@ export(float) var press_time = 3
 var idx: int = -1
 var direction: int = -1
 
+var can_play = true
+
 var _target_action: String = ''
 var _first_press_done: bool = false
 var _keeps_pressing: bool = false
@@ -68,9 +70,12 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 				Tween.EASE_IN
 			)
 			$Tween.start()
-		else:
-			_keeps_pressing = true
 			
+		else:
+			if value <= 15 && can_play:
+				EventsMgr.emit_signal('play_requested','VO', 'Casi')
+				can_play = false
+			_keeps_pressing = true
 			$Tween.resume(self, 'value')
 
 
@@ -88,6 +93,7 @@ func set_current_state(state: int) -> void:
 
 func key_press_done(object: Object, key: NodePath) -> void:
 	self._current_state = States.INACTIVE
+	can_play = true
 	emit_signal('done', self)
 
 

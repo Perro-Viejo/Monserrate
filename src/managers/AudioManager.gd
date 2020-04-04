@@ -9,6 +9,8 @@ func _ready():
 	EventsMgr.connect('play_requested', self, 'play_sound')
 	EventsMgr.connect('stop_requested', self, 'stop_sound')
 	EventsMgr.connect('pause_requested', self, 'pause_sound')
+	
+	
 
 func _get_audio(source, sound) -> Node:
 	return get_node(''+source+'/'+sound)
@@ -20,6 +22,11 @@ func play_sound(source: String, sound: String) -> void:
 		audio.stream_paused = false
 	else:
 		audio.play()
+		if audio is AudioStreamPlayer:
+			if audio.is_connected('finished', self, '_on_finished'):
+				return
+			else:
+				audio.connect('finished', self, '_on_finished', [source, sound])
 
 
 func stop_sound(source: String, sound: String) -> void:
@@ -31,3 +38,6 @@ func pause_sound(source: String, sound: String) -> void:
 	
 	if not audio.get('stream_paused'):
 		audio.stream_paused = true
+
+func _on_finished(source, sound):
+	EventsMgr.emit_signal('stream_finished', source, sound)
