@@ -109,7 +109,7 @@ func set_active() -> void:
 func start_tween(i: float, f: float) -> void:
 	var t: float = (i * press_time) / 100.0
 	
-	if f > i:
+	if f > i and i > 0:
 		t = press_time / (i * 0.3)
 	
 	$Tween.interpolate_property(self, 'value', i, f, t, Tween.TRANS_LINEAR, Tween.EASE_OUT)
