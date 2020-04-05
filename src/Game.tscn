@@ -6,7 +6,6 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-initial_scene = 2
 funds = 3000
 
 [node name="World" type="CanvasLayer" parent="."]

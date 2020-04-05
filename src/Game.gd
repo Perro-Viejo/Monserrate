@@ -8,7 +8,6 @@ export (int) var funds = 5000
 var has_gift = false
 
 var _current_scene: Node
-var _earned: float
 
 onready var scene_container: Node2D = $World/SceneContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
@@ -32,5 +31,5 @@ func change_scene(id: String) -> void:
 
 
 func _increase_earnings(amount: float = 0.0) -> void:
-	_earned += amount
-	print('En el tarro hay %d' % (_earned * 1000))
+	funds += amount * 1000
+	print('En el tarro hay %d' % funds)
