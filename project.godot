@@ -57,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Monserrate"
-config/description="Un juego sobra una estatua humana para el Stayhome GameJam, representa la informalidad laboral."
+config/description="Un juego sobre una estatua humana para el Stayhome GameJam, representa la informalidad laboral."
 run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
 
@@ -65,6 +65,7 @@ config/icon="res://icon.png"
 
 EventsMgr="*res://src/managers/EventsManager.gd"
 ConstantsMgr="*res://src/managers/ConstantsManager.gd"
+DataMgr="*res://src/managers/DataManager.gd"
 
 [debug]
 
@@ -76,6 +77,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=320
 window/size/height=240
+window/size/always_on_top=true
 window/size/test_width=640
 window/size/test_height=480
 mouse_cursor/custom_image="res://assets/sprites/gui/cursor.png"

@@ -17,6 +17,7 @@ var _target_action: String = ''
 var _first_press_done: bool = false
 var _was_pressing: bool = false
 var _current_state: int = States.WAITING setget set_current_state
+var _current_direction: int = -ConstantsMgr.Arrow.RND
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _init() -> void:
 	self._current_state = States.WAITING
@@ -28,6 +29,7 @@ func _ready() -> void:
 		randomize()
 		direction = randi() % 4 # Un número aleatorio entre 0 y 3
 	
+	_current_direction = direction
 	match direction:
 		ConstantsMgr.Arrow.LEFT:
 			$Arrow.rect_rotation = 0
@@ -55,6 +57,9 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 			_first_press_done = true
 			
 			start_tween(self.value, 0)
+			
+			# Enviar señal para cambiar de pose
+			EventsMgr.emit_signal('pose_changed', _current_direction)
 		else:
 			if value <= 60 && can_play:
 				EventsMgr.emit_signal('play_requested','VO/Main', 'Casi')

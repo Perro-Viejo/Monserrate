@@ -7,9 +7,10 @@ signal scene_changed(id)
 
 # ░░░░ STATUE ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 signal coin_inserted(amount)
+signal presentation_started()
+signal pose_changed(pose)
 signal presentation_finished()
 signal tip_given(amount)
-signal presentation_started()
 
 # ░░░░ GUI ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 signal day_started(duration)

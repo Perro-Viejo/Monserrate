@@ -1,6 +1,8 @@
 class_name Pedestrian
 extends Area2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
+enum States { WALKING, WATCHING }
+
 var target_pos: float = 0
 
 var _speed: int = 6
@@ -9,6 +11,7 @@ var _max: float = 0.0
 # La cantidad de dinero que ponen cuando empieza a moverse la estatua
 var _first_tip: float = 0.0
 var _angry: bool = false
+var current_state: int = States.WALKING
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	$Emoticon.hide()
@@ -46,13 +49,16 @@ func _remove_self(target: KinematicBody2D, path: NodePath) -> void:
 
 
 func _put_coin(area: Area2D) -> void:
+	if area.name != 'Statue': return
+	
 	randomize()
 	var rnd: int = randi() % 100
 	
 	$Emoticon.show()
 	
 	if randf() < _stingy_prob:
-		print('¡Todo lo rico!' if rnd > 50 else '¡Esto se ve interesantosky!')
+		current_state = States.WATCHING
+
 		if rnd > 50:
 			$Emoticon.play('Heart')
 			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Heart')
@@ -60,25 +66,41 @@ func _put_coin(area: Area2D) -> void:
 			$Emoticon.play('Happy')
 			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Happy')
 		
-		# TODO: Poner retroalimentación audio y visual
+		# Hacer que los peatones se muevan un tilín si ya otro está viendo para
+		# que no se superpongan ───────────────────────────────────────────────┐
+		var shift: int = 8
 		
+		if $AnimatedSprite.flip_h:
+			shift *= -1
+		
+		for area in get_overlapping_areas():
+			if area.name != 'Statue' \
+				and (area as Pedestrian).current_state == States.WATCHING:
+				# Que sólo se desplace si detecta que el área que está debajo
+				# es un peatón VIENDO a la estatua.
+				position.x += shift
+		# └────────────────────────────────────────────────────────────────────┘
+		
+		# TODO: Poner retroalimentación de audio ♪ y visual Θ
+		
+		# Decidir cuánto poner y disparar el evento que lo notifica
 		_first_tip = rand_range(0.2, _max / 2.0)
-		
-		# Disparar evento de metida de dinero
 		EventsMgr.emit_signal('coin_inserted', _first_tip)
 		
-		# Detener el caminado y ponerse a pillar
+		# Detener el caminado y ponerse a ver
 		$Tween.stop(self, 'position:x')
 		$AnimatedSprite.play('Look')
+		
+		if not DataMgr.get('statue_moving'):
+			# Iniciar temporizador de irse por impaciencia si la estatua no se
+			# está moviendo ya
+			_angry = false
+			$Patience.connect('timeout', self, '_set_angry')
+			$Patience.start()
 		
 		# Escuchar eventos relacionados a la presentación
 		EventsMgr.connect('presentation_finished', self, '_leave', [ true ])
 		EventsMgr.connect('presentation_started', self, '_stop_patience')
-		
-		# Iniciar temporizador de irse por impaciencia
-		_angry = false
-		$Patience.connect('timeout', self, '_set_angry')
-		$Patience.start()
 	else:
 		if rnd > 50:
 			$Emoticon.play('Sad')
@@ -86,15 +108,19 @@ func _put_coin(area: Area2D) -> void:
 		else:
 			$Emoticon.play('Angry')
 			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
-			
-		print('Qué vida de mierda' if rnd > 50 else 'Prole hijueputa')
 
 
 func _calm_down(area: Area2D) -> void:
+	if _angry: return
 	$Emoticon.hide()
 
 
-func _leave(happy: bool) -> void:
+func _set_angry() -> void:
+	_angry = true
+	_leave()
+
+
+func _leave(happy: bool = false) -> void:
 	if happy: _angry = false
 
 	if not _angry:
@@ -104,13 +130,20 @@ func _leave(happy: bool) -> void:
 			$Emoticon.play('Money')
 			#un sonido de monedo aqui
 	else:
-		print('Por eso es que se quedan pobres los malparidos')
 		$Emoticon.play('Angry')
 		EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
 
+	$Emoticon.show()
 	$Tween.resume(self, 'position:x')
-	
+
 	_disconnect()
+
+
+func _stop_patience() -> void:
+	_angry = false
+
+	_disconnect()
+	$Patience.stop()
 
 
 func _disconnect() -> void:
@@ -120,14 +153,3 @@ func _disconnect() -> void:
 	
 	if $Patience.is_connected('timeout', self, '_leave'):
 		$Patience.disconnect('timeout', self, '_leave')
-
-
-func _set_angry() -> void:
-	_angry = true
-
-
-func _stop_patience() -> void:
-	_angry = false
-
-	_disconnect()
-	$Patience.stop()
