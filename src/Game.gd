@@ -25,6 +25,8 @@ func _ready() -> void:
 	# Conectar escuchadores de señal
 	EventsMgr.connect('scene_changed', self, 'change_scene')
 	EventsMgr.connect('coin_inserted', self, '_increase_earnings')
+	EventsMgr.connect('game_finished', self, '_reset_game')
+	
 
 
 func change_scene(id: String) -> void:
@@ -42,3 +44,7 @@ func _increase_earnings(amount: float = 0.0) -> void:
 	DataMgr.data_set(ConstantsMgr.DataIds.FUNDS, funds)
 	
 	print('Hay %d lucas en la marrana' % funds)
+
+func _reset_game():
+	print('volvio a empezar')
+	funds = 3000

@@ -1,9 +1,16 @@
-extends Control
+extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Button.connect('button_down', self, '_go_home')
+	$Start.connect('button_down', self, '_go_home')
+	$Credits.connect('toggled', self, '_show_credits')
 
 
 func _go_home() -> void:
 	EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.HOME)
+
+func _show_credits(pressed):
+	if pressed:
+		$Creditos.show()
+	else:
+		$Creditos.hide()

@@ -8,6 +8,7 @@ var playing_action = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready():
 	EventsMgr.connect('stream_finished', self, '_on_stream_finished')
+	EventsMgr.connect('game_finished', self, '_reset_home')
 	
 	$Cepillo.connect('button_down', self, '_on_button_down', ['Cepillo'])
 	$Control.connect('button_down', self, '_on_button_down', ['Control'])
@@ -31,9 +32,10 @@ func _on_button_down(object: String) -> void:
 
 func _on_stream_finished(source, sound):
 	playing_action = false
+	print(days_left)
 	if sound == 'Switch':
 		if not days_left == 0:
-			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
 			days_left -= 1
+			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
 		else:
 			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.STORE)

@@ -4,6 +4,7 @@ extends Node
 
 # ░░░░ ESCENAS ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 signal scene_changed(id)
+signal game_finished()
 
 # ░░░░ STATUE ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 signal coin_inserted(amount)
