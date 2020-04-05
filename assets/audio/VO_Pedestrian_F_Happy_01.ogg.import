@@ -11,5 +11,5 @@ dest_files=[ "res://.import/VO_Pedestrian_F_Happy_01.ogg-1f52f26006791c7317daf15
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

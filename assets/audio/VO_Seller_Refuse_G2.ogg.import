@@ -11,5 +11,5 @@ dest_files=[ "res://.import/VO_Seller_Refuse_G2.ogg-a4d4306ced4933fed4f84c4d93da
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

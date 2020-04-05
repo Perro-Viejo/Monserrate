@@ -19,13 +19,13 @@ func _on_button_down(object: String) -> void:
 	if not playing_action:
 		match object:
 			'Cepillo':
-				EventsMgr.emit_signal('play_requested', 'VO', 'Cepillo')
+				EventsMgr.emit_signal('play_requested', 'VO/Main', 'Cepillo')
 			'Control':
-				EventsMgr.emit_signal('play_requested', 'VO', 'Tv')
+				EventsMgr.emit_signal('play_requested', 'VO/Main', 'Tv')
 			'Tarea':
-				EventsMgr.emit_signal('play_requested', 'VO', 'Tarea')
+				EventsMgr.emit_signal('play_requested', 'VO/Girl', 'Tarea')
 			'Switch':
-				EventsMgr.emit_signal('play_requested', 'VO', 'Switch')
+				EventsMgr.emit_signal('play_requested', 'VO/Main', 'Switch')
 				
 		playing_action = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/Managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada.ogg" type="AudioStream" id=2]
@@ -13,47 +13,148 @@
 [ext_resource path="res://assets/audio/VO_KeyDone_03.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/audio/VO_KeyDone_01.ogg" type="AudioStream" id=12]
 [ext_resource path="res://assets/audio/VO_KeyDone_04.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Heart_01.ogg" type="AudioStream" id=14]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Happy_03.ogg" type="AudioStream" id=15]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Happy_02.ogg" type="AudioStream" id=16]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Heart_02.ogg" type="AudioStream" id=17]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Happy_01.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Sad_02.ogg" type="AudioStream" id=19]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Angry_02.ogg" type="AudioStream" id=20]
+[ext_resource path="res://assets/audio/VO_Sad.ogg" type="AudioStream" id=21]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Sad_01.ogg" type="AudioStream" id=22]
+[ext_resource path="res://assets/audio/VO_FelizCumple.ogg" type="AudioStream" id=23]
+[ext_resource path="res://assets/audio/VO_TeQuiero.ogg" type="AudioStream" id=24]
+[ext_resource path="res://assets/audio/VO_Gracias.ogg" type="AudioStream" id=25]
+[ext_resource path="res://assets/audio/VO_Pedestrian_F_Angry_01.ogg" type="AudioStream" id=26]
+[ext_resource path="res://assets/audio/VO_Seller_Refuse_G1.ogg" type="AudioStream" id=27]
+[ext_resource path="res://assets/audio/VO_Seller_Refuse_G2.ogg" type="AudioStream" id=28]
+[ext_resource path="res://assets/audio/VO_Seller_Refuse_G3.ogg" type="AudioStream" id=29]
+[ext_resource path="res://assets/audio/VO_Seller_Greet.ogg" type="AudioStream" id=30]
+[ext_resource path="res://assets/audio/VO_Seller_Sell.ogg" type="AudioStream" id=31]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="VO" type="Node2D" parent="."]
 
-[node name="Cepillo" type="AudioStreamPlayer" parent="VO"]
+[node name="Main" type="Node2D" parent="VO"]
+
+[node name="Cepillo" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 5 )
 
-[node name="Jornada_Fin" type="AudioStreamPlayer" parent="VO"]
+[node name="Jornada_Fin" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 2 )
 
-[node name="Switch" type="AudioStreamPlayer" parent="VO"]
+[node name="Switch" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 3 )
 
-[node name="Tarea" type="AudioStreamPlayer" parent="VO"]
-stream = ExtResource( 6 )
-
-[node name="Tv" type="AudioStreamPlayer" parent="VO"]
+[node name="Tv" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 4 )
 
-[node name="Casi" type="Node2D" parent="VO"]
+[node name="Casi" type="Node2D" parent="VO/Main"]
 script = ExtResource( 9 )
 
-[node name="Casi_01" type="AudioStreamPlayer" parent="VO/Casi"]
+[node name="Casi_01" type="AudioStreamPlayer" parent="VO/Main/Casi"]
 stream = ExtResource( 7 )
 
-[node name="Casi_02" type="AudioStreamPlayer" parent="VO/Casi"]
+[node name="Casi_02" type="AudioStreamPlayer" parent="VO/Main/Casi"]
 stream = ExtResource( 8 )
 
-[node name="KeyDone" type="Node2D" parent="VO"]
+[node name="KeyDone" type="Node2D" parent="VO/Main"]
 script = ExtResource( 9 )
 
-[node name="KeyDone_01" type="AudioStreamPlayer" parent="VO/KeyDone"]
+[node name="KeyDone_01" type="AudioStreamPlayer" parent="VO/Main/KeyDone"]
 stream = ExtResource( 12 )
 
-[node name="KeyDone_02" type="AudioStreamPlayer" parent="VO/KeyDone"]
+[node name="KeyDone_02" type="AudioStreamPlayer" parent="VO/Main/KeyDone"]
 stream = ExtResource( 10 )
 
-[node name="KeyDone_03" type="AudioStreamPlayer" parent="VO/KeyDone"]
+[node name="KeyDone_03" type="AudioStreamPlayer" parent="VO/Main/KeyDone"]
 stream = ExtResource( 11 )
 
-[node name="KeyDone_04" type="AudioStreamPlayer" parent="VO/KeyDone"]
+[node name="KeyDone_04" type="AudioStreamPlayer" parent="VO/Main/KeyDone"]
 stream = ExtResource( 13 )
+
+[node name="FelizCumple" type="AudioStreamPlayer" parent="VO/Main"]
+stream = ExtResource( 23 )
+
+[node name="Sad" type="AudioStreamPlayer" parent="VO/Main"]
+stream = ExtResource( 21 )
+
+[node name="Girl" type="Node2D" parent="VO"]
+
+[node name="Tarea" type="AudioStreamPlayer" parent="VO/Girl"]
+stream = ExtResource( 6 )
+
+[node name="Gracias" type="AudioStreamPlayer" parent="VO/Girl"]
+stream = ExtResource( 25 )
+
+[node name="TeQuiero" type="AudioStreamPlayer" parent="VO/Girl"]
+stream = ExtResource( 24 )
+pitch_scale = 1.17
+
+[node name="Pedestrian" type="Node2D" parent="VO"]
+
+[node name="Happy" type="Node2D" parent="VO/Pedestrian"]
+script = ExtResource( 9 )
+RandomVolume = true
+minVolume = -2.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Happy"]
+stream = ExtResource( 18 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="VO/Pedestrian/Happy"]
+stream = ExtResource( 16 )
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="VO/Pedestrian/Happy"]
+stream = ExtResource( 15 )
+
+[node name="Heart" type="Node2D" parent="VO/Pedestrian"]
+script = ExtResource( 9 )
+RandomVolume = true
+minVolume = -5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Heart"]
+stream = ExtResource( 14 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="VO/Pedestrian/Heart"]
+stream = ExtResource( 17 )
+
+[node name="Angry" type="Node2D" parent="VO/Pedestrian"]
+script = ExtResource( 9 )
+RandomVolume = true
+minVolume = -5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Angry"]
+stream = ExtResource( 26 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="VO/Pedestrian/Angry"]
+stream = ExtResource( 20 )
+
+[node name="Sad" type="Node2D" parent="VO/Pedestrian"]
+script = ExtResource( 9 )
+RandomVolume = true
+minVolume = -5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Sad"]
+stream = ExtResource( 22 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="VO/Pedestrian/Sad"]
+stream = ExtResource( 19 )
+
+[node name="Seller" type="Node2D" parent="VO"]
+
+[node name="Greet" type="AudioStreamPlayer" parent="VO/Seller"]
+stream = ExtResource( 30 )
+
+[node name="El Mostro" type="AudioStreamPlayer" parent="VO/Seller"]
+stream = ExtResource( 27 )
+
+[node name="El Oso" type="AudioStreamPlayer" parent="VO/Seller"]
+stream = ExtResource( 28 )
+
+[node name="La Micki" type="AudioStreamPlayer" parent="VO/Seller"]
+stream = ExtResource( 29 )
+
+[node name="Sell" type="AudioStreamPlayer" parent="VO/Seller"]
+stream = ExtResource( 31 )

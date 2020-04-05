@@ -53,7 +53,12 @@ func _put_coin(area: Area2D) -> void:
 	
 	if randf() < _stingy_prob:
 		print('¡Todo lo rico!' if rnd > 50 else '¡Esto se ve interesantosky!')
-		$Emoticon.play('Heart' if rnd > 50 else 'Happy')
+		if rnd > 50:
+			$Emoticon.play('Heart')
+			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Heart')
+		else:
+			$Emoticon.play('Happy')
+			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Happy')
 		
 		# TODO: Poner retroalimentación audio y visual
 		
@@ -75,7 +80,13 @@ func _put_coin(area: Area2D) -> void:
 		$Patience.connect('timeout', self, '_set_angry')
 		$Patience.start()
 	else:
-		$Emoticon.play('Sad' if rnd > 50 else 'Angry')
+		if rnd > 50:
+			$Emoticon.play('Sad')
+			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Sad')
+		else:
+			$Emoticon.play('Angry')
+			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
+			
 		print('Qué vida de mierda' if rnd > 50 else 'Prole hijueputa')
 
 
@@ -91,9 +102,11 @@ func _leave(happy: bool) -> void:
 		if randf() < _stingy_prob:
 			EventsMgr.emit_signal('tip_given', rand_range(_first_tip, _max))
 			$Emoticon.play('Money')
+			#un sonido de monedo aqui
 	else:
 		print('Por eso es que se quedan pobres los malparidos')
 		$Emoticon.play('Angry')
+		EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
 
 	$Tween.resume(self, 'position:x')
 	

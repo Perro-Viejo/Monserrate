@@ -5,7 +5,7 @@ var index_sound = -1
 var select_sound
 var canplay
 
-export (float) var Volume = 0
+export (float) var Volume = -1
 export (float) var Pitch = 0
 
 export (bool) var RandomVolume
@@ -16,7 +16,8 @@ export (bool) var RandomPitch
 export (float) var minPitch
 export (float) var maxPitch
 
-var avVolume
+var avVolume = 0
+var ranVol = 0
 var avPitch
 var dflt_values: Dictionary
 
@@ -37,11 +38,13 @@ func play():
 	
 	index_sound = randi()%get_child_count()
 	select_sound = get_child(index_sound)
+	avVolume = (select_sound.get_volume_db() + Volume)
 #
-#	if RandomVolume == true:
-#		select_sound.randomizeVol(avVolume, minVolume, maxVolume)
-#	else:
-#	select_sound.set_volume_db(avVolume)
+	if RandomVolume == true:
+		randomizeVol(avVolume, minVolume, maxVolume)
+		select_sound.set_volume_db(avVolume + ranVol)
+	else:
+		select_sound.set_volume_db(avVolume)
 #
 #
 #	if RandomPitch == true:
@@ -52,12 +55,10 @@ func play():
 	select_sound.set_pitch_scale(dflt_values[select_sound.name].pitch + Pitch)
 	
 	
-#func randomizeVol(Volume, minVolume, maxVolume):
-#	var ranVol = (rand_range( minVolume, (maxVolume+1)))
-#	select_sound.set_volume_db(Volume + ranVol)
-#
+func randomizeVol(Volume, minVolume, maxVolume):
+	ranVol = (rand_range(minVolume, maxVolume+1))
+
 #func randomizePitch(_Pitch, minPitch, maxPitch):
 #		var ranPitch = (rand_range( minPitch + 1, (maxPitch+1)))
 #		if (_Pitch + ranPitch > 0):
-#			select_sound.set_pitch_scale(_Pitch + ranPitch)
-
+#			select_sound.set_pitch_scale((_Pitch + ranPitch))

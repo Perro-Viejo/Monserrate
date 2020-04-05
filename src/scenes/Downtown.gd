@@ -38,4 +38,6 @@ func spawn_pedestrian() -> void:
 
 
 func go_home() -> void:
+	EventsMgr.emit_signal('play_requested', 'VO/Main', 'Jornada_Fin')
+	yield(get_tree().create_timer(2), 'timeout')
 	EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.HOME)

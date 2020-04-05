@@ -11,5 +11,5 @@ dest_files=[ "res://.import/VO_FelizCumple.ogg-ed89e87615c5474aa1f071d5b6d1c9c4.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -56,8 +56,8 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 			
 			start_tween(self.value, 0)
 		else:
-			if value <= 15 && can_play:
-				EventsMgr.emit_signal('play_requested','VO', 'Casi')
+			if value <= 60 && can_play:
+				EventsMgr.emit_signal('play_requested','VO/Main', 'Casi')
 				can_play = false
 			_was_pressing = true
 
@@ -95,7 +95,7 @@ func tween_completed(obj: TextureProgress, key: NodePath) -> void:
 	if self.value == 0:
 		self._current_state = States.INACTIVE
 		can_play = true
-		EventsMgr.emit_signal('play_requested','VO', 'KeyDone')
+		EventsMgr.emit_signal('play_requested','VO/Main', 'KeyDone')
 		emit_signal('done', self)
 	elif self.value == 100.0:
 		# Volvió al inicio, ¿Qué hacer?
