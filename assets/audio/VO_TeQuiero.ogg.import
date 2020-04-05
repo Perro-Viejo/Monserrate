@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_TeQuiero.ogg-5978c8843a5a0d25985a25a7e41a54dc.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_TeQuiero.ogg"
+dest_files=[ "res://.import/VO_TeQuiero.ogg-5978c8843a5a0d25985a25a7e41a54dc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

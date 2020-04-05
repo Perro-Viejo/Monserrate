@@ -5,6 +5,8 @@ extends Node2D
 export(ConstantsMgr.Scene) var initial_scene = ConstantsMgr.Scene.MENU
 export (int) var funds = 5000
 
+var has_gift = false
+
 var _current_scene: Node
 var _earned: float
 

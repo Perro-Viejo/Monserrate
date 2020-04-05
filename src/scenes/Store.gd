@@ -1,6 +1,7 @@
 extends Node2D
 
 var current_funds 
+var buying_attempts = 0
 
 func _ready():
 	
@@ -12,6 +13,7 @@ func _ready():
 	$Gift_03.connect('button_down', self, '_on_button_down', ['La Micki', 30000])
 
 func _on_button_down(gift, cost):
+	
 	if current_funds >= cost:
 		print('Tenga su mamarracho')
 		match gift:
@@ -21,5 +23,11 @@ func _on_button_down(gift, cost):
 				$Gift_02.hide()
 			'La Micki':
 				$Gift_03.hide()
+		get_node('../../..').has_gift = true
+		EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.ENDING)
 	else:
-		print (gift, ' cuesta $', cost, '. No le alcanza mi chan :(')
+		if not buying_attempts == 4:
+			buying_attempts += 1
+			print (gift, ' cuesta $', cost, '. No le alcanza mi chan :(')
+		else: 
+			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.ENDING)

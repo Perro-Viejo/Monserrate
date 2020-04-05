@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_Seller_Refuse_G3.ogg-be221d43fe28a7bbaa788ad1d228fd5e.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_Seller_Refuse_G3.ogg"
+dest_files=[ "res://.import/VO_Seller_Refuse_G3.ogg-be221d43fe28a7bbaa788ad1d228fd5e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

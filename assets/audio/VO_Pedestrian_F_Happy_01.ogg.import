@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_Pedestrian_F_Happy_01.ogg-1f52f26006791c7317daf159790b4fbc.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_Pedestrian_F_Happy_01.ogg"
+dest_files=[ "res://.import/VO_Pedestrian_F_Happy_01.ogg-1f52f26006791c7317daf159790b4fbc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

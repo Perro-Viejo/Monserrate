@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_Gracias.ogg-9003b8044ee8852fd7b77615c9dbbd69.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_Gracias.ogg"
+dest_files=[ "res://.import/VO_Gracias.ogg-9003b8044ee8852fd7b77615c9dbbd69.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

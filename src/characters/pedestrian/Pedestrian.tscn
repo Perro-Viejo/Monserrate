@@ -33,6 +33,11 @@ animations = [ {
 "loop": true,
 "name": "Walk",
 "speed": 2.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "Look",
+"speed": 5.0
 } ]
 
 [sub_resource type="AtlasTexture" id=11]
@@ -45,7 +50,7 @@ region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 16, 80, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
@@ -73,7 +78,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 6 ) ],
 "loop": true,
-"name": "Heart",
+"name": "Sad",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 7 ) ],

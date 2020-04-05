@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_FelizCumple.ogg-ed89e87615c5474aa1f071d5b6d1c9c4.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_FelizCumple.ogg"
+dest_files=[ "res://.import/VO_FelizCumple.ogg-ed89e87615c5474aa1f071d5b6d1c9c4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
