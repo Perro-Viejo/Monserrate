@@ -148,8 +148,10 @@ func _stop_patience() -> void:
 
 func _disconnect() -> void:
 	# Desconectar escuchadores de señales de la presentación
-	EventsMgr.disconnect('presentation_finished', self, '_leave')
-	EventsMgr.disconnect('presentation_started', self, '_stop_patience')
-	
+	if EventsMgr.is_connected('presentation_finished', self, '_leave'):
+		EventsMgr.disconnect('presentation_finished', self, '_leave')
+	if EventsMgr.is_connected('presentation_started', self, '_stop_patience'):
+		EventsMgr.disconnect('presentation_started', self, '_stop_patience')
+	# Desconectarse del Timer de la impaciencia
 	if $Patience.is_connected('timeout', self, '_leave'):
 		$Patience.disconnect('timeout', self, '_leave')
