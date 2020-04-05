@@ -2,7 +2,7 @@ extends Area2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(int) var cooldown = 5
 
-enum States { SHOWING, WAITING, GOODBYE }
+enum States { SHOWING, WAITING, GOODBYE, SHAME }
 
 var _current_state: int = States.WAITING setget set_current_state
 var _pedestrian_waiting: bool = false
@@ -25,6 +25,8 @@ func set_current_state(state: int) -> void:
 			$Sprite.frame = 5
 		States.WAITING:
 			$Sprite.frame = 0
+		States.SHAME:
+			$Sprite.frame = 6
 
 
 func _start_presentation(amount: float = 0.0) -> void:
@@ -39,9 +41,12 @@ func _start_presentation(amount: float = 0.0) -> void:
 func _say_bye(quit: bool = false) -> void:
 	if not quit:
 		self._current_state = States.GOODBYE
-		get_tree().create_timer(cooldown).connect('timeout', self, '_pose')
 	else:
-		_pose()
+		_pedestrian_waiting = false
+		self._current_state = States.SHAME
+
+	yield(get_tree().create_timer(cooldown), 'timeout')
+	_pose()
 
 
 func _pose() -> void:

@@ -11,6 +11,11 @@ var _no_press_count: float = 0.0
 func start() -> void:
 	if is_visible(): return
 	
+	# Antes que cualquier cosa, verificar si hay teclas "acumuladas" y mandarlas
+	# pa' la cholla
+	if $KeysContainer.get_child_count() > 0:
+		_clean()
+	
 	# Seleccionar el patrón de movimientos
 	var step: int = fix_step
 	var keys: Array = ConstantsMgr.Steps.keys()
@@ -46,6 +51,8 @@ func start() -> void:
 
 
 func _quit_performance() -> void:
+	if _active_key == null: return
+	
 	if _active_key and (_active_key as Key).idx == active_idx:
 		# Si se ha quedado en la misma pose por el tiempo de espera para
 		# abandonar... entonces abandonar
@@ -54,9 +61,10 @@ func _quit_performance() -> void:
 
 
 func to_next_key(done_key: Key) -> void:
+	# Dejar de revisar si se preiona o no algo
+	$WaitToQuit.stop()
+
 	if done_key.idx + 1 == $KeysContainer.get_child_count():
-		# Dejar de revisar si se preiona o no algo
-		$WaitToQuit.stop()
 		
 		# Eliminar las flechas de atrás para adelante para que no se muera Godot
 		close()
@@ -70,21 +78,27 @@ func close() -> void:
 	_active_key = null
 	active_idx = -1
 
-	for idx in range($KeysContainer.get_child_count() - 1, -1, -1):
-		$KeysContainer.get_child(idx).queue_free()
-
+	_clean()
 	hide()
 
 
 # Se llama cuando desde fuera hace '_active_key = algo' o desde dentro se hace
 # 'self._active_key = algo'
 func set_active_idx(idx: int) -> void:
-	if idx < 0: return
-	
 	active_idx = idx
+
+	if active_idx < 0:
+		_active_key = null
+		return
+	
 	
 	_active_key = $KeysContainer.get_child(active_idx) as Key
 	_active_key.set_active()
 	
 	# Iniciar el temporizador para saber si se abandona la presentación
 	$WaitToQuit.start()
+
+
+func _clean() -> void:
+	for idx in range($KeysContainer.get_child_count() - 1, -1, -1):
+		$KeysContainer.get_child(idx).queue_free()
