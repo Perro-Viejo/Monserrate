@@ -9,11 +9,11 @@ func _ready() -> void:
 	# Conectar escuchadores de eventos
 	$Timer.connect('timeout', self, 'spawn_pedestrian')
 	EventsMgr.connect('day_finished', self, 'go_home')
-	EventsMgr.connect('presentation_started', self, 'update_statue_state', [true])
-	EventsMgr.connect('presentation_finished', self, 'update_statue_state')
+	EventsMgr.connect('performance_started', self, '_update_statue_state', [true])
+	EventsMgr.connect('performance_finished', self, '_update_statue_state')
 	
 	# Iniciar la escena
-	update_statue_state()
+	_update_statue_state()
 	_trigger_tick()
 	EventsMgr.emit_signal('day_started', worktime * 60)
 
@@ -47,5 +47,5 @@ func go_home() -> void:
 	EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.HOME)
 
 
-func update_statue_state(started: bool = false) -> void:
+func _update_statue_state(started: bool = false) -> void:
 	DataMgr.set_data('statue_moving', started)

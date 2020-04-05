@@ -10,7 +10,7 @@ func _ready() -> void:
 	_clock.hide()
 	
 	# Conectar escuchadores de señales
-	EventsMgr.connect('presentation_started', self, 'show_keys')
+	EventsMgr.connect('moves_required', self, 'show_keys')
 	EventsMgr.connect('day_started', self, 'show_clock')
 	EventsMgr.connect('day_finished', self, 'hide_all')
 

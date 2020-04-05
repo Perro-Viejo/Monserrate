@@ -10,7 +10,7 @@ var _pedestrian_waiting: bool = false
 func _ready() -> void:
 	# Conectar escuchadores de señales
 	EventsMgr.connect('coin_inserted', self, '_start_presentation')
-	EventsMgr.connect('presentation_finished', self, '_say_bye')
+	EventsMgr.connect('performance_finished', self, '_say_bye')
 	EventsMgr.connect('pose_changed', self, '_play_pose')
 	# Iniciar la escena
 	_pose()
@@ -31,14 +31,12 @@ func _start_presentation(amount: float = 0.0) -> void:
 	if _current_state == States.WAITING:
 		self._current_state = States.SHOWING
 
-		EventsMgr.emit_signal('presentation_started')
+		EventsMgr.emit_signal('moves_required')
 	else:
 		_pedestrian_waiting = true
 
 
 func _say_bye() -> void:
-	# TODO: Ejecutar animación de despedida
-	
 	self._current_state = States.GOODBYE
 	
 	get_tree().create_timer(cooldown).connect('timeout', self, '_pose')

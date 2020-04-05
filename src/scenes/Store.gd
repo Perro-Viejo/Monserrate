@@ -5,13 +5,13 @@ var buying_attempts = 0
 var can_play = true
 
 func _ready():
-	
-	current_funds = get_node('../../..').funds
-	print('tienes $', current_funds)
+	current_funds = DataMgr.get_data('funds')
+	print('Hay %d lucas en la marrana' % current_funds)
+
 	EventsMgr.emit_signal('play_requested', 'VO/Seller', 'Greet')
 	can_play = false
 	EventsMgr.connect('stream_finished', self, '_on_stream_finished')
-	
+
 	$Gift_01.connect('button_down', self, '_on_button_down', ['El Mostro', 5000])
 	$Gift_02.connect('button_down', self, '_on_button_down', ['El Oso', 15000])
 	$Gift_03.connect('button_down', self, '_on_button_down', ['La Micki', 30000])
@@ -19,7 +19,6 @@ func _ready():
 func _on_button_down(gift, cost):
 	if can_play:
 		if current_funds >= cost:
-			print('Tenga su mamarracho')
 			match gift:
 				'El Mostro':
 					$Gift_01.hide()
@@ -33,7 +32,6 @@ func _on_button_down(gift, cost):
 		else:
 			if not buying_attempts == 3:
 				buying_attempts += 1
-				print (gift, ' cuesta $', cost, '. No le alcanza mi chan :(')
 				EventsMgr.emit_signal('play_requested', 'VO/Seller', gift)
 				can_play = false
 	

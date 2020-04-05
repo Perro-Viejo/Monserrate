@@ -12,8 +12,12 @@ var _current_scene: Node
 onready var scene_container: Node2D = $World/SceneContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
+	# Poner datos iniciales
+	DataMgr.set_data('funds', funds)
+	
 	var scn_name: String = ConstantsMgr.Scene.keys()[initial_scene]
 	var scn_id: String = ConstantsMgr.Scenes[scn_name]
+	
 	_current_scene = load('res://src/scenes/%s.tscn' % scn_id).instance()
 	scene_container.add_child(_current_scene)
 	
@@ -32,4 +36,8 @@ func change_scene(id: String) -> void:
 
 func _increase_earnings(amount: float = 0.0) -> void:
 	funds += amount * 1000
-	print('En el tarro hay %d' % funds)
+	
+	# Actualizar fondos en DataManager
+	DataMgr.set_data('funds', funds)
+	
+	print('Hay %d lucas en la marrana' % funds)

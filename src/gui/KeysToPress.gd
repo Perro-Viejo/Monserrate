@@ -3,9 +3,12 @@ extends CenterContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(ConstantsMgr.Step) var fix_step = ConstantsMgr.Step.RND
 
+var _performance_started: bool = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func start() -> void:
 	if is_visible(): return
+	
+	_performance_started = false
 	
 	show()
 	
@@ -40,9 +43,13 @@ func to_next_key(done_key: Key) -> void:
 		# Eliminar las flechas de atrás para adelante para que no se muera Godot
 		close()
 
-		EventsMgr.emit_signal('presentation_finished')
+		EventsMgr.emit_signal('performance_finished')
 		
 		return
+
+	if not _performance_started:
+		_performance_started = true
+		EventsMgr.emit_signal('performance_started')
 
 	($KeysContainer.get_child(done_key.idx + 1) as Key).set_active()
 

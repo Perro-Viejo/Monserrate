@@ -91,7 +91,7 @@ func _put_coin(area: Area2D) -> void:
 		$Tween.stop(self, 'position:x')
 		$AnimatedSprite.play('Look')
 		
-		if not DataMgr.get('statue_moving'):
+		if not DataMgr.get_data('statue_moving'):
 			# Iniciar temporizador de irse por impaciencia si la estatua no se
 			# está moviendo ya
 			_angry = false
@@ -99,8 +99,8 @@ func _put_coin(area: Area2D) -> void:
 			$Patience.start()
 		
 		# Escuchar eventos relacionados a la presentación
-		EventsMgr.connect('presentation_finished', self, '_leave', [ true ])
-		EventsMgr.connect('presentation_started', self, '_stop_patience')
+		EventsMgr.connect('performance_finished', self, '_leave', [ true ])
+		EventsMgr.connect('performance_started', self, '_stop_patience')
 	else:
 		if rnd > 50:
 			$Emoticon.play('Sad')
@@ -116,8 +116,9 @@ func _calm_down(area: Area2D) -> void:
 
 
 func _set_angry() -> void:
-	_angry = true
-	_leave()
+	if not DataMgr.get_data('statue_moving'):
+		_angry = true
+		_leave()
 
 
 func _leave(happy: bool = false) -> void:
@@ -142,16 +143,16 @@ func _leave(happy: bool = false) -> void:
 func _stop_patience() -> void:
 	_angry = false
 
-	_disconnect()
+#	_disconnect()
 	$Patience.stop()
 
 
 func _disconnect() -> void:
 	# Desconectar escuchadores de señales de la presentación
-	if EventsMgr.is_connected('presentation_finished', self, '_leave'):
-		EventsMgr.disconnect('presentation_finished', self, '_leave')
-	if EventsMgr.is_connected('presentation_started', self, '_stop_patience'):
-		EventsMgr.disconnect('presentation_started', self, '_stop_patience')
+	if EventsMgr.is_connected('performance_finished', self, '_leave'):
+		EventsMgr.disconnect('performance_finished', self, '_leave')
+	if EventsMgr.is_connected('performance_started', self, '_stop_patience'):
+		EventsMgr.disconnect('performance_started', self, '_stop_patience')
 	# Desconectarse del Timer de la impaciencia
 	if $Patience.is_connected('timeout', self, '_leave'):
 		$Patience.disconnect('timeout', self, '_leave')
