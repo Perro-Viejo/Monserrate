@@ -14,10 +14,11 @@ var direction: int = -1
 var can_play = true
 
 var _target_action: String = ''
-var _first_press_done: bool = false
+var _press_started: bool = false
 var _was_pressing: bool = false
 var _current_state: int = States.WAITING setget set_current_state
 var _current_direction: int = -ConstantsMgr.Arrow.RND
+var _first_press: bool = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _init() -> void:
 	self._current_state = States.WAITING
@@ -53,13 +54,20 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	if not _current_state == States.ACTIVE: return
 	
 	if event.is_action(_target_action):
-		if not _first_press_done:
-			_first_press_done = true
+		if not _press_started:
+			_press_started = true
 			
 			start_tween(self.value, 0)
 			
 			# Enviar señal para cambiar de pose
 			EventsMgr.emit_signal('pose_changed', _current_direction)
+			
+			# Si es el primer movimiento y se presiona la flecha por primera
+			# vez, entonces es que inició la presentación ---------------------
+			if idx == 0 and not _first_press:
+				_first_press = true
+				EventsMgr.emit_signal('performance_started')
+			# -----------------------------------------------------------------
 		else:
 			if value <= 60 && can_play:
 				EventsMgr.emit_signal('play_requested','VO/Main', 'Casi')
@@ -87,7 +95,7 @@ func tween_step(obj: Object, key: NodePath, elapsed: float, val: float) -> void:
 	if _was_pressing and not Input.is_action_pressed(_target_action):
 		# Si ya estaba presionando y dejó de presionar
 		_was_pressing = false
-		_first_press_done = false
+		_press_started = false
 		
 		$Tween.stop(self, 'value')
 		$Tween.remove(self, 'value')
