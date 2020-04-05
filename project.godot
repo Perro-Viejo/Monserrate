@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CenterContainer",
+"class": "Clock",
+"language": "GDScript",
+"path": "res://src/gui/Clock.gd"
+}, {
 "base": "CanvasLayer",
 "class": "GUI",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://src/characters/pedestrian/Pedestrian.gd"
 } ]
 _global_script_class_icons={
+"Clock": "",
 "GUI": "",
 "Game": "",
 "Home": "",

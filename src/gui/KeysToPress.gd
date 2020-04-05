@@ -37,7 +37,18 @@ func start() -> void:
 
 func to_next_key(done_key: Key) -> void:
 	if done_key.idx + 1 == $KeysContainer.get_child_count():
-		hide()
-		print('¡Se acabo el juego!')
+		# Eliminar las flechas de atrás para adelante para que no se muera Godot
+		close()
+
+		EventsMgr.emit_signal('presentation_finished')
+		
 		return
+
 	($KeysContainer.get_child(done_key.idx + 1) as Key).set_active()
+
+
+func close() -> void:
+	for idx in range($KeysContainer.get_child_count() - 1, -1, -1):
+		$KeysContainer.get_child(idx).queue_free()
+
+	hide()

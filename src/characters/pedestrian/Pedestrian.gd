@@ -5,6 +5,10 @@ var target_pos: float = 0
 
 var _speed: int = 6
 var _stingy_prob: float = 0.0
+var _max: float = 0.0
+# La cantidad de dinero que ponen cuando empieza a moverse la estatua
+var _first_tip: float = 0.0
+var _angry: bool = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	$Emoticon.hide()
@@ -14,8 +18,12 @@ func _ready() -> void:
 		$Emoticon.position.x *= -1.0
 	
 	randomize()
+	# Hay una probabilidad máxima del 80% de que vean la estatua
 	_stingy_prob = max(randf() - 0.2, 0.0)
-	
+	# TODO: Hacer que la cantidad máxima a poner tenga en cuenta el nivel de
+	# tacañez del peatón
+	_max = 2.0
+
 	$Tween.interpolate_property(
 		self,
 		'position:x',
@@ -46,11 +54,26 @@ func _put_coin(area: Area2D) -> void:
 	if randf() < _stingy_prob:
 		print('¡Todo lo rico!' if rnd > 50 else '¡Esto se ve interesantosky!')
 		$Emoticon.play('Heart' if rnd > 50 else 'Happy')
+		
 		# TODO: Poner retroalimentación audio y visual
-		# TODO: Elegir al azar la cantidad a meter
-		EventsMgr.emit_signal('coin_inserted')
+		
+		_first_tip = rand_range(0.2, _max / 2.0)
+		
+		# Disparar evento de metida de dinero
+		EventsMgr.emit_signal('coin_inserted', _first_tip)
+		
+		# Detener el caminado y ponerse a pillar
 		$Tween.stop(self, 'position:x')
 		$AnimatedSprite.play('Look')
+		
+		# Escuchar eventos relacionados a la presentación
+		EventsMgr.connect('presentation_finished', self, '_leave', [ true ])
+		EventsMgr.connect('presentation_started', self, '_stop_patience')
+		
+		# Iniciar temporizador de irse por impaciencia
+		_angry = false
+		$Patience.connect('timeout', self, '_set_angry')
+		$Patience.start()
 	else:
 		$Emoticon.play('Sad' if rnd > 50 else 'Angry')
 		print('Qué vida de mierda' if rnd > 50 else 'Prole hijueputa')
@@ -58,3 +81,40 @@ func _put_coin(area: Area2D) -> void:
 
 func _calm_down(area: Area2D) -> void:
 	$Emoticon.hide()
+
+
+func _leave(happy: bool) -> void:
+	if happy: _angry = false
+
+	if not _angry:
+		randomize()
+		if randf() < _stingy_prob:
+			EventsMgr.emit_signal('tip_given', rand_range(_first_tip, _max))
+			$Emoticon.play('Money')
+	else:
+		print('Por eso es que se quedan pobres los malparidos')
+		$Emoticon.play('Angry')
+
+	$Tween.resume(self, 'position:x')
+	
+	_disconnect()
+
+
+func _disconnect() -> void:
+	# Desconectar escuchadores de señales de la presentación
+	EventsMgr.disconnect('presentation_finished', self, '_leave')
+	EventsMgr.disconnect('presentation_started', self, '_stop_patience')
+	
+	if $Patience.is_connected('timeout', self, '_leave'):
+		$Patience.disconnect('timeout', self, '_leave')
+
+
+func _set_angry() -> void:
+	_angry = true
+
+
+func _stop_patience() -> void:
+	_angry = false
+
+	_disconnect()
+	$Patience.stop()

@@ -6,16 +6,19 @@ export(ConstantsMgr.Scene) var initial_scene = ConstantsMgr.Scene.MENU
 export (int) var funds = 5000
 
 var _current_scene: Node
+var _earned: float
 
 onready var scene_container: Node2D = $World/SceneContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	var scn_name: String = ConstantsMgr.Scene.keys()[initial_scene]
-	_current_scene = load('res://src/scenes/%s.tscn' % scn_name).instance()
+	var scn_id: String = ConstantsMgr.Scenes[scn_name]
+	_current_scene = load('res://src/scenes/%s.tscn' % scn_id).instance()
 	scene_container.add_child(_current_scene)
 	
 	# Conectar escuchadores de señal
 	EventsMgr.connect('scene_changed', self, 'change_scene')
+	EventsMgr.connect('coin_inserted', self, '_increase_earnings')
 
 
 func change_scene(id: String) -> void:
@@ -24,3 +27,8 @@ func change_scene(id: String) -> void:
 	_current_scene = load('res://src/scenes/%s.tscn' % id).instance() as Node2D
 	
 	scene_container.add_child(_current_scene)
+
+
+func _increase_earnings(amount: float = 0.0) -> void:
+	_earned += amount
+	print('En el tarro hay %d' % (_earned * 1000))
