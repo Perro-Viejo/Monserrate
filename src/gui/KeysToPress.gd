@@ -2,11 +2,14 @@ class_name KeyToPress
 extends CenterContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(ConstantsMgr.Step) var fix_step = ConstantsMgr.Step.RND
+
+var active_idx: int setget set_active_idx
+
+var _active_key: Key
+var _no_press_count: float = 0.0
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func start() -> void:
 	if is_visible(): return
-	
-	show()
 	
 	# Seleccionar el patrón de movimientos
 	var step: int = fix_step
@@ -31,23 +34,57 @@ func start() -> void:
 		$KeysContainer.add_child(key)
 		
 		idx += 1
-	($KeysContainer.get_child(0) as Key).set_active()
+
+	self.active_idx = 0
+	
+	# Conectar escuchador de temporizador
+	if not $WaitToQuit.is_connected('timeout', self, '_quit_performance'):
+		$WaitToQuit.connect('timeout', self, '_quit_performance')
+
+	# Mostarse pa' que se vean las flechas
+	show()
+
+
+func _quit_performance() -> void:
+	if _active_key and (_active_key as Key).idx == active_idx:
+		# Si se ha quedado en la misma pose por el tiempo de espera para
+		# abandonar... entonces abandonar
+		close()
+		EventsMgr.emit_signal('performance_finished', true)
 
 
 func to_next_key(done_key: Key) -> void:
 	if done_key.idx + 1 == $KeysContainer.get_child_count():
+		# Dejar de revisar si se preiona o no algo
+		$WaitToQuit.stop()
+		
 		# Eliminar las flechas de atrás para adelante para que no se muera Godot
 		close()
-
-		EventsMgr.emit_signal('performance_finished')
-		
+		EventsMgr.emit_signal('performance_finished', false)
 		return
 
-	($KeysContainer.get_child(done_key.idx + 1) as Key).set_active()
+	self.active_idx = done_key.idx + 1
 
 
 func close() -> void:
+	_active_key = null
+	active_idx = -1
+
 	for idx in range($KeysContainer.get_child_count() - 1, -1, -1):
 		$KeysContainer.get_child(idx).queue_free()
 
 	hide()
+
+
+# Se llama cuando desde fuera hace '_active_key = algo' o desde dentro se hace
+# 'self._active_key = algo'
+func set_active_idx(idx: int) -> void:
+	if idx < 0: return
+	
+	active_idx = idx
+	
+	_active_key = $KeysContainer.get_child(active_idx) as Key
+	_active_key.set_active()
+	
+	# Iniciar el temporizador para saber si se abandona la presentación
+	$WaitToQuit.start()

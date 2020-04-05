@@ -9,19 +9,13 @@ func _ready() -> void:
 	# Conectar escuchadores de eventos
 	$Timer.connect('timeout', self, 'spawn_pedestrian')
 	EventsMgr.connect('day_finished', self, 'go_home')
-	EventsMgr.connect('performance_started', self, '_update_statue_state', [true])
-	EventsMgr.connect('performance_finished', self, '_update_statue_state')
+	EventsMgr.connect('performance_started', self, '_set_moving')
+	EventsMgr.connect('performance_finished', self, '_set_not_moving')
 	
 	# Iniciar la escena
-	_update_statue_state()
+	_set_not_moving()
 	_trigger_tick()
 	EventsMgr.emit_signal('day_started', worktime * 60)
-
-
-func _trigger_tick() -> void:
-	randomize()
-	$Timer.wait_time = randi() % 5 + 1
-	$Timer.start()
 
 
 func spawn_pedestrian() -> void:
@@ -47,5 +41,15 @@ func go_home() -> void:
 	EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.HOME)
 
 
-func _update_statue_state(started: bool = false) -> void:
-	DataMgr.set_data('statue_moving', started)
+func _set_moving() -> void:
+	DataMgr.data_set('statue_moving', true)
+
+
+func _set_not_moving(quit: bool = false) -> void:
+	DataMgr.data_set('statue_moving', false)
+
+
+func _trigger_tick() -> void:
+	randomize()
+	$Timer.wait_time = randi() % 5 + 1
+	$Timer.start()

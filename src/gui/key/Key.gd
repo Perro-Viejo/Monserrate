@@ -12,10 +12,10 @@ var idx: int = -1
 var direction: int = -1
 
 var can_play = true
+var was_pressing: bool = false
 
 var _target_action: String = ''
 var _press_started: bool = false
-var _was_pressing: bool = false
 var _current_state: int = States.WAITING setget set_current_state
 var _current_direction: int = -ConstantsMgr.Arrow.RND
 var _first_press: bool = false
@@ -72,7 +72,7 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 			if value <= 60 && can_play:
 				EventsMgr.emit_signal('play_requested','VO/Main', 'Casi')
 				can_play = false
-			_was_pressing = true
+			was_pressing = true
 
 
 func set_current_state(state: int) -> void:
@@ -92,9 +92,9 @@ func tween_step(obj: Object, key: NodePath, elapsed: float, val: float) -> void:
 		$Tween.remove(self, 'value')
 		return
 	
-	if _was_pressing and not Input.is_action_pressed(_target_action):
+	if was_pressing and not Input.is_action_pressed(_target_action):
 		# Si ya estaba presionando y dejó de presionar
-		_was_pressing = false
+		was_pressing = false
 		_press_started = false
 		
 		$Tween.stop(self, 'value')

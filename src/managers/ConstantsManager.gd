@@ -20,3 +20,9 @@ const Steps: Dictionary = {
 	SOLDIER = [ Arrow.RIGHT, Arrow.UP, Arrow.UP, Arrow.RIGHT ],
 	PEASANT = [ Arrow.DOWN, Arrow.DOWN, Arrow.LEFT, Arrow.RND ]
 }
+
+# ░░░░ DATOS ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+const DataIds: Dictionary = {
+	FUNDS = 'funds',
+	AUDIENCE = 'audience'
+}

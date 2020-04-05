@@ -9,7 +9,7 @@ signal scene_changed(id)
 signal coin_inserted(amount)
 signal performance_started()
 signal pose_changed(pose)
-signal performance_finished()
+signal performance_finished(quit)
 signal tip_given(amount)
 
 # ░░░░ GUI ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

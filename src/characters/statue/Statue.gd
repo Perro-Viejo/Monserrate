@@ -36,10 +36,12 @@ func _start_presentation(amount: float = 0.0) -> void:
 		_pedestrian_waiting = true
 
 
-func _say_bye() -> void:
-	self._current_state = States.GOODBYE
-	
-	get_tree().create_timer(cooldown).connect('timeout', self, '_pose')
+func _say_bye(quit: bool = false) -> void:
+	if not quit:
+		self._current_state = States.GOODBYE
+		get_tree().create_timer(cooldown).connect('timeout', self, '_pose')
+	else:
+		_pose()
 
 
 func _pose() -> void:

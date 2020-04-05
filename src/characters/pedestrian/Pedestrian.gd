@@ -50,13 +50,14 @@ func _remove_self(target: KinematicBody2D, path: NodePath) -> void:
 
 func _put_coin(area: Area2D) -> void:
 	if area.name != 'Statue': return
-	
+
 	randomize()
 	var rnd: int = randi() % 100
 	
 	$Emoticon.show()
 	
-	if randf() < _stingy_prob:
+	if DataMgr.data_get(ConstantsMgr.DataIds.AUDIENCE) < 6 \
+		and randf() < _stingy_prob:
 		current_state = States.WATCHING
 
 		if rnd > 50:
@@ -91,7 +92,7 @@ func _put_coin(area: Area2D) -> void:
 		$Tween.stop(self, 'position:x')
 		$AnimatedSprite.play('Look')
 		
-		if not DataMgr.get_data('statue_moving'):
+		if not DataMgr.data_get('statue_moving'):
 			# Iniciar temporizador de irse por impaciencia si la estatua no se
 			# está moviendo ya
 			_angry = false
@@ -99,8 +100,11 @@ func _put_coin(area: Area2D) -> void:
 			$Patience.start()
 		
 		# Escuchar eventos relacionados a la presentación
-		EventsMgr.connect('performance_finished', self, '_leave', [ true ])
+		EventsMgr.connect('performance_finished', self, '_leave')
 		EventsMgr.connect('performance_started', self, '_stop_patience')
+		
+		# Aumentar el contador de expectadores
+		DataMgr.data_sumi(ConstantsMgr.DataIds.AUDIENCE, 1)
 	else:
 		if rnd > 50:
 			$Emoticon.play('Sad')
@@ -116,15 +120,13 @@ func _calm_down(area: Area2D) -> void:
 
 
 func _set_angry() -> void:
-	if not DataMgr.get_data('statue_moving'):
+	if not DataMgr.data_get('statue_moving'):
 		_angry = true
 		_leave()
 
 
-func _leave(happy: bool = false) -> void:
-	if happy: _angry = false
-
-	if not _angry:
+func _leave(quit: bool = false) -> void:
+	if not _angry and not quit:
 		randomize()
 		if randf() < _stingy_prob:
 			EventsMgr.emit_signal('tip_given', rand_range(_first_tip, _max))
@@ -138,12 +140,14 @@ func _leave(happy: bool = false) -> void:
 	$Tween.resume(self, 'position:x')
 
 	_disconnect()
+	
+	# Reducir el contador de expectadores
+	DataMgr.data_sumi(ConstantsMgr.DataIds.AUDIENCE, -1)
 
 
 func _stop_patience() -> void:
 	_angry = false
 
-#	_disconnect()
 	$Patience.stop()
 
 

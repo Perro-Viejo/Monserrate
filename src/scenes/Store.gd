@@ -5,7 +5,7 @@ var buying_attempts = 0
 var can_play = true
 
 func _ready():
-	current_funds = DataMgr.get_data('funds')
+	current_funds = DataMgr.data_get(ConstantsMgr.DataIds.FUNDS)
 	print('Hay %d lucas en la marrana' % current_funds)
 
 	EventsMgr.emit_signal('play_requested', 'VO/Seller', 'Greet')
