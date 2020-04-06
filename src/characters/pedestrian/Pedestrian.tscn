@@ -54,19 +54,19 @@ region = Rect2( 16, 80, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 64, 80, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
-region = Rect2( 64, 16, 16, 16 )
+region = Rect2( 32, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 32, 16, 16, 16 )
+region = Rect2( 64, 80, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 3 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 64, 16, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
@@ -77,22 +77,22 @@ animations = [ {
 }, {
 "frames": [ SubResource( 11 ) ],
 "loop": true,
-"name": "Angry",
+"name": "Sad",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 12 ) ],
 "loop": true,
-"name": "Money",
+"name": "Happy",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ) ],
 "loop": true,
-"name": "Happy",
+"name": "Angry",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 14 ) ],
 "loop": true,
-"name": "Sad",
+"name": "Money",
 "speed": 5.0
 } ]
 
@@ -112,7 +112,7 @@ animation = "Look"
 playing = true
 
 [node name="Emoticon" type="AnimatedSprite" parent="."]
-position = Vector2( 16, -80 )
+position = Vector2( 0, -96 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 15 )
 animation = "Heart"
