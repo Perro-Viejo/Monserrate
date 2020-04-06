@@ -3,6 +3,8 @@ extends CanvasLayer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 onready var _keys_to_press: KeyToPress = $Control/KeysToPress
 onready var _clock: CenterContainer = $Control/Clock
+onready var arrow = load('res://assets/sprites/gui/cursor-arrow.png')
+onready var move = load('res://assets/sprites/gui/cursor-pointing_hand.png')
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	# Poner estado por defecto a las cosas
@@ -13,6 +15,10 @@ func _ready() -> void:
 	EventsMgr.connect('moves_required', self, 'show_keys')
 	EventsMgr.connect('day_started', self, 'show_clock')
 	EventsMgr.connect('day_finished', self, 'hide_all')
+	
+	# Enchular cursor
+	Input.set_custom_mouse_cursor(arrow, Input.CURSOR_ARROW)
+	Input.set_custom_mouse_cursor(move, Input.CURSOR_POINTING_HAND)
 
 
 func show_keys() -> void:

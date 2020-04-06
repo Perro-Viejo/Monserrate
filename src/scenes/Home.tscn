@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/world/home-bg.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/gui/tv-hover.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/gui/clean-normal.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/TEMP/Calendario.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/gui/calendar.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/gui/homework-hover.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/gui/homework-normal.png" type="Texture" id=6]
 [ext_resource path="res://src/scenes/Home.gd" type="Script" id=7]
@@ -11,60 +11,615 @@
 [ext_resource path="res://assets/sprites/gui/tv-normal.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/gui/sleep-normal.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/gui/sleep-hover.png" type="Texture" id=11]
+[ext_resource path="res://resources/DynamicFont/CalendarTitle-HungryPro16.tres" type="DynamicFont" id=12]
+[ext_resource path="res://resources/DynamicFont/CalendarDay-HungryPro12.tres" type="DynamicFont" id=13]
 
 [node name="Home" type="Node2D"]
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 120.0 ],
+"_edit_vertical_guides_": [ 160.0 ]
+}
+prev_days = 2
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
 
 [node name="Calendario" type="Sprite" parent="."]
-visible = false
-position = Vector2( 68.3274, 13.186 )
+position = Vector2( 176, 56 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Cepillo" type="TextureButton" parent="."]
-margin_left = 152.0
-margin_top = 176.0
-margin_right = 194.0
-margin_bottom = 218.0
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 8 )
+[node name="Mes" type="Label" parent="Calendario"]
+margin_left = 72.0
+margin_top = 16.0
+margin_right = 114.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 12 )
+custom_colors/font_color = Color( 0.262745, 0.203922, 0.333333, 1 )
+text = "abril"
+align = 2
+uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="TextureButton" parent="."]
-margin_left = 200.0
-margin_top = 136.0
-margin_right = 242.0
-margin_bottom = 178.0
-texture_normal = ExtResource( 9 )
-texture_hover = ExtResource( 2 )
+[node name="Testos" type="GridContainer" parent="Calendario"]
+margin_left = 16.0
+margin_top = 45.0
+margin_right = 110.0
+margin_bottom = 121.0
+custom_constants/vseparation = 2
+custom_constants/hseparation = 4
+columns = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel1" type="Label" parent="Calendario/Testos"]
+margin_right = 5.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "l"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel2" type="Label" parent="Calendario/Testos"]
+margin_left = 9.0
+margin_right = 14.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "m"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel3" type="Label" parent="Calendario/Testos"]
+margin_left = 18.0
+margin_right = 23.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "m"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel4" type="Label" parent="Calendario/Testos"]
+margin_left = 27.0
+margin_right = 32.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "j"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel5" type="Label" parent="Calendario/Testos"]
+margin_left = 36.0
+margin_right = 41.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "v"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel6" type="Label" parent="Calendario/Testos"]
+margin_left = 45.0
+margin_right = 50.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "s"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayLabel7" type="Label" parent="Calendario/Testos"]
+margin_left = 54.0
+margin_right = 59.0
+margin_bottom = 11.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.333333, 0.439216, 0.392157, 1 )
+text = "d"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day1" type="Label" parent="Calendario/Testos"]
+margin_top = 13.0
+margin_right = 5.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day2" type="Label" parent="Calendario/Testos"]
+margin_left = 9.0
+margin_top = 13.0
+margin_right = 14.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day3" type="Label" parent="Calendario/Testos"]
+margin_left = 18.0
+margin_top = 13.0
+margin_right = 23.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day4" type="Label" parent="Calendario/Testos"]
+margin_left = 27.0
+margin_top = 13.0
+margin_right = 32.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day5" type="Label" parent="Calendario/Testos"]
+margin_left = 36.0
+margin_top = 13.0
+margin_right = 41.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day6" type="Label" parent="Calendario/Testos"]
+margin_left = 45.0
+margin_top = 13.0
+margin_right = 50.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day7" type="Label" parent="Calendario/Testos"]
+margin_left = 54.0
+margin_top = 13.0
+margin_right = 59.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day8" type="Label" parent="Calendario/Testos"]
+margin_top = 26.0
+margin_right = 5.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day9" type="Label" parent="Calendario/Testos"]
+margin_left = 9.0
+margin_top = 26.0
+margin_right = 14.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day10" type="Label" parent="Calendario/Testos"]
+margin_left = 18.0
+margin_top = 26.0
+margin_right = 23.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day11" type="Label" parent="Calendario/Testos"]
+margin_left = 27.0
+margin_top = 26.0
+margin_right = 32.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day12" type="Label" parent="Calendario/Testos"]
+margin_left = 36.0
+margin_top = 26.0
+margin_right = 41.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day13" type="Label" parent="Calendario/Testos"]
+margin_left = 45.0
+margin_top = 26.0
+margin_right = 50.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day14" type="Label" parent="Calendario/Testos"]
+margin_left = 54.0
+margin_top = 26.0
+margin_right = 59.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day15" type="Label" parent="Calendario/Testos"]
+margin_top = 39.0
+margin_right = 5.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day16" type="Label" parent="Calendario/Testos"]
+margin_left = 9.0
+margin_top = 39.0
+margin_right = 14.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day17" type="Label" parent="Calendario/Testos"]
+margin_left = 18.0
+margin_top = 39.0
+margin_right = 23.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day18" type="Label" parent="Calendario/Testos"]
+margin_left = 27.0
+margin_top = 39.0
+margin_right = 32.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day19" type="Label" parent="Calendario/Testos"]
+margin_left = 36.0
+margin_top = 39.0
+margin_right = 41.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day20" type="Label" parent="Calendario/Testos"]
+margin_left = 45.0
+margin_top = 39.0
+margin_right = 50.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day21" type="Label" parent="Calendario/Testos"]
+margin_left = 54.0
+margin_top = 39.0
+margin_right = 59.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day22" type="Label" parent="Calendario/Testos"]
+margin_top = 52.0
+margin_right = 5.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day23" type="Label" parent="Calendario/Testos"]
+margin_left = 9.0
+margin_top = 52.0
+margin_right = 14.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day24" type="Label" parent="Calendario/Testos"]
+margin_left = 18.0
+margin_top = 52.0
+margin_right = 23.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day25" type="Label" parent="Calendario/Testos"]
+margin_left = 27.0
+margin_top = 52.0
+margin_right = 32.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day26" type="Label" parent="Calendario/Testos"]
+margin_left = 36.0
+margin_top = 52.0
+margin_right = 41.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day27" type="Label" parent="Calendario/Testos"]
+margin_left = 45.0
+margin_top = 52.0
+margin_right = 50.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day28" type="Label" parent="Calendario/Testos"]
+margin_left = 54.0
+margin_top = 52.0
+margin_right = 59.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day29" type="Label" parent="Calendario/Testos"]
+margin_top = 65.0
+margin_right = 5.0
+margin_bottom = 76.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day30" type="Label" parent="Calendario/Testos"]
+margin_left = 9.0
+margin_top = 65.0
+margin_right = 14.0
+margin_bottom = 76.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day31" type="Label" parent="Calendario/Testos"]
+margin_left = 18.0
+margin_top = 65.0
+margin_right = 23.0
+margin_bottom = 76.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Switch" type="TextureButton" parent="."]
+margin_left = 38.0
+margin_top = 135.0
+margin_right = 80.0
+margin_bottom = 177.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 10 )
+texture_hover = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Tarea" type="TextureButton" parent="."]
-margin_left = 152.0
-margin_top = 88.0
-margin_right = 194.0
-margin_bottom = 130.0
+margin_left = 71.0
+margin_top = 102.0
+margin_right = 113.0
+margin_bottom = 144.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Switch" type="TextureButton" parent="."]
+[node name="Control" type="TextureButton" parent="."]
 margin_left = 104.0
-margin_top = 136.0
+margin_top = 135.0
 margin_right = 146.0
-margin_bottom = 178.0
-texture_normal = ExtResource( 10 )
-texture_hover = ExtResource( 11 )
+margin_bottom = 177.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 9 )
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cepillo" type="TextureButton" parent="."]
+margin_left = 71.0
+margin_top = 168.0
+margin_right = 113.0
+margin_bottom = 210.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
