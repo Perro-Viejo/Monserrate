@@ -5,14 +5,13 @@ signal done(key)
 
 enum States { WAITING, ACTIVE, INACTIVE }
 
-export(float) var press_time = 3
-
 # Que esté o no activa lo determina el papaito (KeysToPress.gd)
 var idx: int = -1
 var direction: int = -1
 
 var can_play = true
 var was_pressing: bool = false
+var press_time: float = 3.0
 
 var _target_action: String = ''
 var _press_started: bool = false

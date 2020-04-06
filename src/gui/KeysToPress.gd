@@ -2,6 +2,7 @@ class_name KeyToPress
 extends CenterContainer
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(ConstantsMgr.Step) var fix_step = ConstantsMgr.Step.RND
+export(float) var key_press_time = 3.0
 
 var active_idx: int setget set_active_idx
 
@@ -33,6 +34,7 @@ func start() -> void:
 		var key: Key = load('res://src/gui/key/Key.tscn').instance()
 		key.idx = idx
 		key.direction = key_dir
+		key.press_time = key_press_time
 		
 		key.connect('done', self, 'to_next_key')
 		

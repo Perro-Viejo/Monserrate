@@ -27,6 +27,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+key_press_time = 2.0
 
 [node name="KeysContainer" type="HBoxContainer" parent="Control/KeysToPress"]
 margin_left = 160.0
