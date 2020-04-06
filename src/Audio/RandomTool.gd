@@ -54,7 +54,10 @@ func play():
 	select_sound.play()
 	select_sound.set_pitch_scale(dflt_values[select_sound.name].pitch + Pitch)
 	
-	
+
+func stop():
+	select_sound.stop()
+
 func randomizeVol(_Volume, _minVolume, _maxVolume):
 	ranVol = (rand_range(_minVolume, _maxVolume+1))
 

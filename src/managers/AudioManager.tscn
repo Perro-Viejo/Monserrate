@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada.ogg" type="AudioStream" id=2]
@@ -31,6 +31,8 @@
 [ext_resource path="res://assets/audio/VO_Seller_Refuse_G3.ogg" type="AudioStream" id=29]
 [ext_resource path="res://assets/audio/VO_Seller_Greet.ogg" type="AudioStream" id=30]
 [ext_resource path="res://assets/audio/VO_Seller_Sell.ogg" type="AudioStream" id=31]
+[ext_resource path="res://assets/audio/MX/MX_Radio_01.ogg" type="AudioStream" id=32]
+[ext_resource path="res://assets/audio/MX/MX_Radio_02.ogg" type="AudioStream" id=33]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -97,7 +99,7 @@ pitch_scale = 1.17
 
 [node name="Happy" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-RandomVolume = true
+Volume = -3.0
 minVolume = -2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Happy"]
@@ -111,7 +113,7 @@ stream = ExtResource( 15 )
 
 [node name="Heart" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-RandomVolume = true
+Volume = -3.0
 minVolume = -5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Heart"]
@@ -122,7 +124,7 @@ stream = ExtResource( 17 )
 
 [node name="Angry" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-RandomVolume = true
+Volume = -3.0
 minVolume = -5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Angry"]
@@ -133,7 +135,7 @@ stream = ExtResource( 20 )
 
 [node name="Sad" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-RandomVolume = true
+Volume = -3.0
 minVolume = -5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Sad"]
@@ -158,3 +160,15 @@ stream = ExtResource( 29 )
 
 [node name="Sell" type="AudioStreamPlayer" parent="VO/Seller"]
 stream = ExtResource( 31 )
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Radio" type="Node2D" parent="Objects"]
+script = ExtResource( 9 )
+Volume = 0.0
+
+[node name="Radio_01" type="AudioStreamPlayer" parent="Objects/Radio"]
+stream = ExtResource( 32 )
+
+[node name="Radio_02" type="AudioStreamPlayer" parent="Objects/Radio"]
+stream = ExtResource( 33 )

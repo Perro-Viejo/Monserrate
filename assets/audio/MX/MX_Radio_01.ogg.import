@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MX_Radio_01.ogg-318077de4703b4af0346071486def175.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/MX/MX_Radio_01.ogg"
+dest_files=[ "res://.import/MX_Radio_01.ogg-318077de4703b4af0346071486def175.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

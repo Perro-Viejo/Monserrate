@@ -28,6 +28,11 @@ func play_sound(source: String, sound: String) -> void:
 				return
 			else:
 				audio.connect('finished', self, '_on_finished', [source, sound])
+		else:
+			if audio.select_sound.is_connected('finished', self, '_on_finished'):
+				return
+			else:
+				audio.select_sound.connect('finished', self, '_on_finished', [source, sound])
 
 
 func stop_sound(source: String, sound: String) -> void:
