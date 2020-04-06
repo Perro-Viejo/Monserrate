@@ -22,11 +22,11 @@ func set_current_state(state: int) -> void:
 	match _current_state:
 		States.GOODBYE:
 			_pedestrian_waiting = false
-			$Sprite.frame = 5
+			$Sprite.play('Bye')
 		States.WAITING:
-			$Sprite.frame = 0
+			$Sprite.play('Stand')
 		States.SHAME:
-			$Sprite.frame = 6
+			$Sprite.play('Shame')
 
 
 func _start_presentation(amount: float = 0.0) -> void:
@@ -59,12 +59,12 @@ func _pose() -> void:
 func _play_pose(direction: int) -> void:
 	match direction:
 		ConstantsMgr.Arrow.LEFT:
-			$Sprite.frame = 2
+			$Sprite.play('Left')
 		ConstantsMgr.Arrow.UP:
-			$Sprite.frame = 4
+			$Sprite.play('Up')
 		ConstantsMgr.Arrow.RIGHT:
-			$Sprite.frame = 1
+			$Sprite.play('Right')
 		ConstantsMgr.Arrow.DOWN:
-			$Sprite.frame = 3
+			$Sprite.play('Down')
 		_:
-			$Sprite.frame = 0
+			$Sprite.play('Stand')

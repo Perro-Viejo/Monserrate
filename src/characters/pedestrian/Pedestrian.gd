@@ -3,22 +3,35 @@ extends Area2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 enum States { WALKING, WATCHING }
 
+const Colors: Array = [
+	'c38890',
+	'8b5580',
+	'be955c',
+	'93a167',
+	'416aa3',
+	'c28d75'
+]
+
 var target_pos: float = 0
 
 var _speed: int = 6
+var _shift: int = 12
 var _stingy_prob: float = 0.0
 var _max: float = 0.0
 # La cantidad de dinero que ponen cuando empieza a moverse la estatua
 var _first_tip: float = 0.0
 var _angry: bool = false
-var current_state: int = States.WALKING
+var _current_state: int setget set_current_state
+var _tween_time: float = 0.0
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	$Emoticon.hide()
 	
 	if self.position.x > target_pos:
+		_shift *= -1
 		$AnimatedSprite.flip_h = true
 		$Emoticon.position.x *= -1.0
+		$CollisionShape2D.position.x *= -1.0
 	
 	randomize()
 	# Hay una probabilidad máxima del 80% de que vean la estatua
@@ -26,22 +39,42 @@ func _ready() -> void:
 	# TODO: Hacer que la cantidad máxima a poner tenga en cuenta el nivel de
 	# tacañez del peatón
 	_max = 2.0
+	
+	# Cambiar color de contorno al azar
+	$AnimatedSprite.modulate = Color(Colors[randi() % Colors.size()])
 
-	$Tween.interpolate_property(
-		self,
-		'position:x',
-		self.position.x,
-		target_pos,
-		_speed,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN
-	)
-	$Tween.start()
+	# Ponerla a caminar
+	_walk()
 	
 	# Conectar estuchadores de señales
 	$Tween.connect('tween_completed', self, '_remove_self')
 	self.connect('area_entered', self, '_put_coin')
 	self.connect('area_exited', self, '_calm_down')
+	
+
+
+func set_current_state(new_state: int) -> void:
+	_current_state = new_state
+	
+	match _current_state:
+		States.WALKING:
+			$AnimatedSprite.play('Walk')
+		States.WATCHING:
+			$AnimatedSprite.play('Look')
+
+
+func _walk() -> void:
+	$Tween.interpolate_property(
+		self,
+		'position:x',
+		self.position.x,
+		target_pos,
+		_speed - _tween_time,
+		Tween.TRANS_QUAD,
+		Tween.EASE_IN
+	)
+	$Tween.start()
+	self._current_state = States.WALKING
 
 
 func _remove_self(target: KinematicBody2D, path: NodePath) -> void:
@@ -58,7 +91,7 @@ func _put_coin(area: Area2D) -> void:
 	
 	if DataMgr.data_get(ConstantsMgr.DataIds.AUDIENCE) < 6 \
 		and randf() < _stingy_prob:
-		current_state = States.WATCHING
+		self._current_state = States.WATCHING
 
 		if rnd > 50:
 			$Emoticon.play('Heart')
@@ -69,17 +102,13 @@ func _put_coin(area: Area2D) -> void:
 		
 		# Hacer que los peatones se muevan un tilín si ya otro está viendo para
 		# que no se superpongan ───────────────────────────────────────────────┐
-		var shift: int = 8
-		
-		if $AnimatedSprite.flip_h:
-			shift *= -1
-		
+
 		for area in get_overlapping_areas():
 			if area.name != 'Statue' \
-				and (area as Pedestrian).current_state == States.WATCHING:
+				and (area as Pedestrian)._current_state == States.WATCHING:
 				# Que sólo se desplace si detecta que el área que está debajo
 				# es un peatón VIENDO a la estatua.
-				position.x += shift
+				position.x += _shift
 		# └────────────────────────────────────────────────────────────────────┘
 		
 		# TODO: Poner retroalimentación de audio ♪ y visual Θ
@@ -89,6 +118,7 @@ func _put_coin(area: Area2D) -> void:
 		EventsMgr.emit_signal('coin_inserted', _first_tip)
 		
 		# Detener el caminado y ponerse a ver
+		_tween_time = $Tween.tell()
 		$Tween.stop(self, 'position:x')
 		$AnimatedSprite.play('Look')
 		
@@ -126,6 +156,8 @@ func _set_angry() -> void:
 
 
 func _leave(quit: bool = false) -> void:
+	self._current_state = States.WALKING
+	
 	if not _angry and not quit:
 		randomize()
 		if randf() < _stingy_prob:
@@ -137,7 +169,7 @@ func _leave(quit: bool = false) -> void:
 		EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
 
 	$Emoticon.show()
-	$Tween.resume(self, 'position:x')
+	_walk()
 
 	_disconnect()
 	

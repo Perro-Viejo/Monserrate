@@ -19,6 +19,6 @@ centered = false
 position = Vector2( 159.5, 113.5 )
 
 [node name="Pedestrians" type="Node2D" parent="."]
-position = Vector2( -64, 180 )
+position = Vector2( -64, 160 )
 
 [node name="Timer" type="Timer" parent="."]

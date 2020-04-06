@@ -28,7 +28,6 @@ func spawn_pedestrian() -> void:
 	else:
 		ped.position.x = 488
 		ped.target_pos = 0
-	ped.modulate = Color(0.5 + randf(), 0.5 + randf(), 0.5 + randf())
 	
 	$Pedestrians.add_child(ped)
 
