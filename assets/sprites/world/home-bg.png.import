@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/progress-bg.png-d4a76c137d69873428bd129c29c105e3.stex"
+path="res://.import/home-bg.png-54affc770a73148fe664b98ccdf2f4f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gui/progress-bg.png"
-dest_files=[ "res://.import/progress-bg.png-d4a76c137d69873428bd129c29c105e3.stex" ]
+source_file="res://assets/sprites/world/home-bg.png"
+dest_files=[ "res://.import/home-bg.png-54affc770a73148fe664b98ccdf2f4f5.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/progress-bg.png-d4a76c137d69873428bd129c29c105e3.stex"
+path="res://.import/clean-hover.png-86329cf182ef43af1c27a4a4da44622d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gui/progress-bg.png"
-dest_files=[ "res://.import/progress-bg.png-d4a76c137d69873428bd129c29c105e3.stex" ]
+source_file="res://assets/sprites/gui/clean-hover.png"
+dest_files=[ "res://.import/clean-hover.png-86329cf182ef43af1c27a4a4da44622d.stex" ]
 
 [params]
 
