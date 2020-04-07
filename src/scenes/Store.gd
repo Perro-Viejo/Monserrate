@@ -32,12 +32,18 @@ func _on_button_down(gift, cost):
 			match gift:
 				'El Mostro':
 					$Gift_01.hide()
+					$Price_01.hide()
 				'El Oso':
 					$Gift_02.hide()
+					$Price_02.hide()
 				'La Micki':
 					$Gift_03.hide()
+					$Price_03.hide()
+
 			EventsMgr.emit_signal('play_requested', 'VO/Seller', 'Sell')
+
 			can_play = false
+
 			get_node('../../..').has_gift = true
 		else:
 			if not buying_attempts == 3:

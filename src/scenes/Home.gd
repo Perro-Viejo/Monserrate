@@ -2,7 +2,6 @@ class_name Home
 extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 # TODO: Llenar esto de variables una gonorrea
-export (int) var days_left = 3
 export (int) var first_day = -30
 export (int) var prev_days = 0
 export (int) var last_day = 30
@@ -54,10 +53,9 @@ func _on_button_down(object: String) -> void:
 
 func _on_stream_finished(source, sound):
 	playing_action = false
-	print(days_left)
+	
 	if sound == 'Switch':
-		if not days_left == 0:
-			days_left -= 1
+		if DataMgr.data_get(ConstantsMgr.DataIds.DAYS_LEFT) > 0:
 			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
 		else:
 			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.STORE)

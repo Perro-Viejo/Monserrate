@@ -24,5 +24,6 @@ const Steps: Dictionary = {
 # ░░░░ DATOS ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 const DataIds: Dictionary = {
 	FUNDS = 'funds',
-	AUDIENCE = 'audience'
+	AUDIENCE = 'audience',
+	DAYS_LEFT = 'days_left'
 }
