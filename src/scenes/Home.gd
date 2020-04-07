@@ -81,18 +81,22 @@ func _on_button_down(object: String) -> void:
 		playing_action = true
 
 func _on_stream_finished(source, sound):
-	if sound == 'A'||'B'||'C':
+	if sound == 'A'||'B'||'C'||'D':
 		playing_action = false
 	
 	match sound:
 		'Cepillo':
 			EventsMgr.emit_signal('play_requested', 'Actions', 'A')
+			playing_action = true
 		'Tv':
 			EventsMgr.emit_signal('play_requested', 'Actions', 'B')
+			playing_action = true
 		'Tarea':
 			EventsMgr.emit_signal('play_requested', 'Actions', 'C')
+			playing_action = true
 		'Switch':
-			EventsMgr.emit_signal('play_requested', 'Actions', 'D')			
+			EventsMgr.emit_signal('play_requested', 'Actions', 'D')
+			playing_action = true			
 	
 	if sound == 'D':
 		EventsMgr.emit_signal('stop_requested', 'BG', 'Home')
