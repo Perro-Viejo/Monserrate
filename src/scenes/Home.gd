@@ -57,7 +57,7 @@ func _ready():
 	# La luca
 	var __funds: int = DataMgr.data_get(ConstantsMgr.DataIds.FUNDS)
 	var __day_to_day: int = DataMgr.data_get(ConstantsMgr.DataIds.DAY_TO_DAY)
-	var __savings: int = __funds - __day_to_day
+	var __savings: int = max(0, __funds - __day_to_day)
 
 	_expenses.text = '$%d' % __day_to_day
 	_profit.text = '$%d' % __funds
