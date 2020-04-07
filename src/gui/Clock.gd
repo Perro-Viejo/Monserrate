@@ -5,7 +5,8 @@ extends CenterContainer
 func start(worktime: int) -> void:
 	show()
 	
-	$Tween.connect('tween_completed', self, '_finish_day')
+	if not $Tween.is_connected('tween_completed', self, '_finish_day'):
+		$Tween.connect('tween_completed', self, '_finish_day')
 	
 	$Tween.interpolate_property(
 		$Progress,

@@ -11,6 +11,7 @@ const Colors: Array = [
 	'416aa3',
 	'c28d75'
 ]
+const Moneys: Array = [ 0.1, 0.2, 0.5, 1.0, 2.0 ]
 
 var target_pos: float = 0
 
@@ -38,7 +39,7 @@ func _ready() -> void:
 	_stingy_prob = max(randf() - 0.2, 0.0)
 	# TODO: Hacer que la cantidad máxima a poner tenga en cuenta el nivel de
 	# tacañez del peatón
-	_max = 2.0
+	_max = Moneys.max() as float
 	
 	# Cambiar color de contorno al azar
 	$AnimatedSprite.modulate = Color(Colors[randi() % Colors.size()])
@@ -114,7 +115,7 @@ func _put_coin(area: Area2D) -> void:
 		# TODO: Poner retroalimentación de audio ♪ y visual Θ
 		
 		# Decidir cuánto poner y disparar el evento que lo notifica
-		_first_tip = rand_range(0.2, _max / 2.0)
+		_first_tip = take_from_pocket()
 		EventsMgr.emit_signal('coin_inserted', _first_tip)
 		
 		# Detener el caminado y ponerse a ver
@@ -161,7 +162,7 @@ func _leave(quit: bool = false) -> void:
 	if not _angry and not quit:
 		randomize()
 		if randf() < _stingy_prob:
-			EventsMgr.emit_signal('tip_given', rand_range(_first_tip, _max))
+			EventsMgr.emit_signal('tip_given', take_from_pocket())
 			$Emoticon.play('Money')
 			#un sonido de monedo aqui
 	else:
@@ -192,3 +193,7 @@ func _disconnect() -> void:
 	# Desconectarse del Timer de la impaciencia
 	if $Patience.is_connected('timeout', self, '_leave'):
 		$Patience.disconnect('timeout', self, '_leave')
+
+
+func take_from_pocket() -> float:
+	return Moneys[randi() % Moneys.size()] as float

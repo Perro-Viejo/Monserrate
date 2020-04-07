@@ -31,6 +31,7 @@ func _ready() -> void:
 
 func change_scene(id: String) -> void:
 	scene_container.remove_child(_current_scene)
+	_current_scene.queue_free()
 	
 	_current_scene = load('res://src/scenes/%s.tscn' % id).instance() as Node2D
 	

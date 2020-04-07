@@ -79,7 +79,7 @@ func set_current_state(state: int) -> void:
 
 	match _current_state:
 		States.WAITING:
-			modulate = Color(1.0, 1.0, 1.0, 0.5)
+			modulate = Color(1.0, 1.0, 1.0, 0.0)
 		States.ACTIVE:
 			modulate = Color(1.0, 1.0, 1.0, 1.0)
 		States.INACTIVE:

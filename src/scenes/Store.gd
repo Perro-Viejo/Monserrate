@@ -5,16 +5,26 @@ var buying_attempts = 0
 var can_play = true
 
 func _ready():
-	current_funds = DataMgr.data_get(ConstantsMgr.DataIds.FUNDS)
+	if DataMgr.data_get(ConstantsMgr.DataIds.FUNDS):
+		current_funds = DataMgr.data_get(ConstantsMgr.DataIds.FUNDS)
+	else:
+		current_funds = 2000
 	print('Hay %d lucas en la marrana' % current_funds)
 
 	EventsMgr.emit_signal('play_requested', 'VO/Seller', 'Greet')
 	can_play = false
 	EventsMgr.connect('stream_finished', self, '_on_stream_finished')
-
+	
 	$Gift_01.connect('button_down', self, '_on_button_down', ['El Mostro', 5000])
 	$Gift_02.connect('button_down', self, '_on_button_down', ['El Oso', 15000])
 	$Gift_03.connect('button_down', self, '_on_button_down', ['La Micki', 30000])
+	
+	$Gift_01.connect('mouse_entered', self, 'toggle_price', [ $Price_01 ])
+	$Gift_01.connect('mouse_exited', self, 'toggle_price', [ $Price_01 ])
+	$Gift_02.connect('mouse_entered', self, 'toggle_price', [ $Price_02 ])
+	$Gift_02.connect('mouse_exited', self, 'toggle_price', [ $Price_02 ])
+	$Gift_03.connect('mouse_entered', self, 'toggle_price', [ $Price_03 ])
+	$Gift_03.connect('mouse_exited', self, 'toggle_price', [ $Price_03 ])
 
 func _on_button_down(gift, cost):
 	if can_play:
@@ -41,4 +51,7 @@ func _on_stream_finished(source, sound):
 		EventsMgr.disconnect('stream_finished', self, '_on_stream_finished')
 	else:
 		can_play = true
-		
+
+
+func toggle_price(label: Label) -> void:
+	label.set_visible(!label.is_visible())

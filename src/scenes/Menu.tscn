@@ -20,6 +20,7 @@ margin_left = 126.5
 margin_top = 110.0
 margin_right = 193.5
 margin_bottom = 130.0
+mouse_default_cursor_shape = 2
 shortcut_in_tooltip = false
 text = "Empezar"
 __meta__ = {
@@ -31,6 +32,7 @@ margin_left = 126.5
 margin_top = 137.0
 margin_right = 193.5
 margin_bottom = 157.0
+mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut_in_tooltip = false
 text = "Creditos"
@@ -54,7 +56,7 @@ margin_top = 171.65
 margin_right = 100.138
 margin_bottom = 219.65
 text = "Mateo Robayo
-Aguador
+(Hizo una parte)
 "
 align = 1
 
@@ -64,7 +66,7 @@ margin_top = 171.65
 margin_right = 328.803
 margin_bottom = 202.65
 text = "Juan Carlos García
-Aguatero"
+(Hizo la otra)"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="Creditos"]
