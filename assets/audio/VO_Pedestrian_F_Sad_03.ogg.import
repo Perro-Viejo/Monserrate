@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/VO_Pedestrian_F_Sad_03.ogg-4d760282633d356c852d3b02a585229b.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/VO_Pedestrian_F_Sad_03.ogg"
+dest_files=[ "res://.import/VO_Pedestrian_F_Sad_03.ogg-4d760282633d356c852d3b02a585229b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

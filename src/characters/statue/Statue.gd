@@ -8,7 +8,8 @@ var _current_state: int = States.WAITING setget set_current_state
 var _pedestrian_waiting: bool = false
 
 var radio_playing: bool = false
-
+var current_pose = ''
+var can_stand = true
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	# Conectar escuchadores de señales
@@ -27,15 +28,21 @@ func set_current_state(state: int) -> void:
 		States.GOODBYE:
 			_pedestrian_waiting = false
 			$Sprite.play('Bye')
+			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Bye')
+			yield(get_tree().create_timer(randf()*1), 'timeout')
+			EventsMgr.emit_signal('play_requested', 'Robot', 'Gracias')
 		States.WAITING:
 			$Sprite.play('Stand')
+			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Stand')
 		States.SHAME:
 			$Sprite.play('Shame')
+			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Shame')
 
 
 func _start_presentation(amount: float = 0.0) -> void:
 	if _current_state == States.WAITING:
 		if not radio_playing:
+			EventsMgr.emit_signal('play_requested','Robot', 'Coin')
 			EventsMgr.emit_signal('play_requested','Objects', 'Radio')
 			radio_playing = true
 		self._current_state = States.SHOWING
@@ -47,6 +54,7 @@ func _start_presentation(amount: float = 0.0) -> void:
 func _radio_finished(source, sound):
 	if sound == 'Radio':
 		radio_playing = false
+		current_pose = ''
 
 func _say_bye(quit: bool = false) -> void:
 	if not quit:
@@ -72,11 +80,30 @@ func _play_pose(direction: int) -> void:
 	match direction:
 		ConstantsMgr.Arrow.LEFT:
 			$Sprite.play('Left')
+			play_pose_sfx('Left')
 		ConstantsMgr.Arrow.UP:
 			$Sprite.play('Up')
+			play_pose_sfx('Up')
 		ConstantsMgr.Arrow.RIGHT:
 			$Sprite.play('Right')
+			play_pose_sfx('Right')
 		ConstantsMgr.Arrow.DOWN:
 			$Sprite.play('Down')
+			play_pose_sfx('Down')
 		_:
 			$Sprite.play('Stand')
+			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Stand')
+
+func play_pose_sfx(pose):
+	if current_pose != pose:
+		current_pose = pose
+		match pose:
+			'Left':
+				EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Left')
+			'Right':
+				EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Right')
+			'Up':
+				EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Up')
+			'Down':
+				EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Down')
+	

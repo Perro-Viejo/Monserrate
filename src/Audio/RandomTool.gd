@@ -40,11 +40,11 @@ func play():
 	select_sound = get_child(index_sound)
 	avVolume = (select_sound.get_volume_db() + Volume)
 #
-	if RandomVolume == true:
-		randomizeVol(avVolume, minVolume, maxVolume)
-		select_sound.set_volume_db(avVolume + ranVol)
-	else:
-		select_sound.set_volume_db(avVolume)
+##	if RandomVolume == true:
+##		randomizeVol(avVolume, minVolume, maxVolume)
+##		select_sound.set_volume_db(avVolume + ranVol)
+#	else:
+	
 #
 #
 #	if RandomPitch == true:
@@ -52,6 +52,7 @@ func play():
 #	#	select_sound.set_pitch_scale((Pitch) + ranPitch)
 #	else:
 	select_sound.play()
+	select_sound.set_volume_db(Volume)
 	select_sound.set_pitch_scale(dflt_values[select_sound.name].pitch + Pitch)
 	
 
