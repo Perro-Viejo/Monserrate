@@ -63,7 +63,7 @@ func _ready():
 	_profit.text = '$%d' % __funds
 	_savings.text = '$%d' % __savings
 	
-	DataMgr.data_set(ConstantsMgr.DataIds.FUNDS, _savings)
+	DataMgr.data_set(ConstantsMgr.DataIds.FUNDS, __savings)
 
 
 func _on_button_down(object: String) -> void:
