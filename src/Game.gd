@@ -5,6 +5,8 @@ extends Node2D
 export(ConstantsMgr.Scene) var initial_scene = ConstantsMgr.Scene.MENU
 export(int) var funds = 5000
 export(int) var days_to_birthday = 3
+export(int) var day = 8
+export(int) var day_to_day = 15000
 
 var has_gift = false
 
@@ -17,6 +19,8 @@ func _ready() -> void:
 	DataMgr.data_set(ConstantsMgr.DataIds.FUNDS, funds)
 	DataMgr.data_set(ConstantsMgr.DataIds.AUDIENCE, 0)
 	DataMgr.data_set(ConstantsMgr.DataIds.DAYS_LEFT, days_to_birthday)
+	DataMgr.data_set(ConstantsMgr.DataIds.DAY, day)
+	DataMgr.data_set(ConstantsMgr.DataIds.DAY_TO_DAY, day_to_day)
 	
 	var scn_name: String = ConstantsMgr.Scene.keys()[initial_scene]
 	var scn_id: String = ConstantsMgr.Scenes[scn_name]
@@ -34,6 +38,7 @@ func _ready() -> void:
 func change_scene(id: String) -> void:
 	if _current_scene.name == ConstantsMgr.Scenes.DOWNTOWN:
 		DataMgr.data_sumi(ConstantsMgr.DataIds.DAYS_LEFT, -1)
+		DataMgr.data_sumi(ConstantsMgr.DataIds.DAY, 1)
 	
 	scene_container.remove_child(_current_scene)
 	_current_scene.queue_free()

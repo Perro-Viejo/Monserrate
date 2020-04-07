@@ -10,7 +10,6 @@ __meta__ = {
 "_edit_horizontal_guides_": [ 120.0 ],
 "_edit_vertical_guides_": [ 159.5 ]
 }
-worktime = 1
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 2 )
