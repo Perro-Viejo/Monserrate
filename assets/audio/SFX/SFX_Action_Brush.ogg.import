@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_Action_Brush.ogg-d20a91770737a72b113a2d9a2a060881.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/SFX/SFX_Action_Brush.ogg"
+dest_files=[ "res://.import/SFX_Action_Brush.ogg-d20a91770737a72b113a2d9a2a060881.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

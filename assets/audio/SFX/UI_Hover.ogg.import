@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/UI_Hover.ogg-611e27b9f57ae80a9e4759d2c9b82cc6.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/SFX/UI_Hover.ogg"
+dest_files=[ "res://.import/UI_Hover.ogg-611e27b9f57ae80a9e4759d2c9b82cc6.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

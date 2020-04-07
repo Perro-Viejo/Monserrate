@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_Action_Homework.ogg-c368ad0c9c3df96a92ff71960feab744.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/SFX/SFX_Action_Homework.ogg"
+dest_files=[ "res://.import/SFX_Action_Homework.ogg-c368ad0c9c3df96a92ff71960feab744.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

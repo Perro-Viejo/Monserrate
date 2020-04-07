@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://src/managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada_04.ogg" type="AudioStream" id=2]
@@ -50,6 +50,13 @@
 [ext_resource path="res://assets/audio/VO_FinJornada_03.ogg" type="AudioStream" id=48]
 [ext_resource path="res://assets/audio/VO_FinJornada_01.ogg" type="AudioStream" id=49]
 [ext_resource path="res://assets/audio/VO_FinJornada_02.ogg" type="AudioStream" id=50]
+[ext_resource path="res://assets/audio/SFX/UI_Click.ogg" type="AudioStream" id=51]
+[ext_resource path="res://assets/audio/SFX/UI_Hover.ogg" type="AudioStream" id=52]
+[ext_resource path="res://assets/audio/SFX/SFX_Action_Brush.ogg" type="AudioStream" id=53]
+[ext_resource path="res://assets/audio/SFX/SFX_Action_Homework.ogg" type="AudioStream" id=54]
+[ext_resource path="res://assets/audio/SFX/SFX_Action_Switch.ogg" type="AudioStream" id=55]
+[ext_resource path="res://assets/audio/SFX/SFX_Action_TV.ogg" type="AudioStream" id=56]
+[ext_resource path="res://assets/audio/SFX/BG_Home.ogg" type="AudioStream" id=57]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -256,3 +263,31 @@ stream = ExtResource( 45 )
 
 [node name="Gracias_03" type="AudioStreamPlayer" parent="Robot/Gracias"]
 stream = ExtResource( 46 )
+
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="A" type="AudioStreamPlayer" parent="Actions"]
+stream = ExtResource( 53 )
+
+[node name="B" type="AudioStreamPlayer" parent="Actions"]
+stream = ExtResource( 56 )
+
+[node name="C" type="AudioStreamPlayer" parent="Actions"]
+stream = ExtResource( 54 )
+
+[node name="D" type="AudioStreamPlayer" parent="Actions"]
+stream = ExtResource( 55 )
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 51 )
+volume_db = -3.0
+
+[node name="Hover" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 52 )
+
+[node name="BG" type="Node2D" parent="."]
+
+[node name="Home" type="AudioStreamPlayer" parent="BG"]
+stream = ExtResource( 57 )

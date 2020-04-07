@@ -7,10 +7,13 @@ func _ready():
 
 
 func _go_home() -> void:
+	EventsMgr.emit_signal('play_requested', 'UI', 'Click')
 	EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.HOME)
 
 func _show_credits(pressed):
 	if pressed:
 		$Creditos.show()
+		EventsMgr.emit_signal('play_requested', 'UI', 'Click')
 	else:
 		$Creditos.hide()
+		EventsMgr.emit_signal('play_requested', 'UI', 'Click')

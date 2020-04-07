@@ -24,6 +24,8 @@ func _ready():
 	EventsMgr.connect('stream_finished', self, '_on_stream_finished')
 	EventsMgr.connect('game_finished', self, '_reset_home')
 	
+	EventsMgr.emit_signal('play_requested', 'BG', 'Home')
+	
 	$Cepillo.connect('button_down', self, '_on_button_down', ['Cepillo'])
 	$Control.connect('button_down', self, '_on_button_down', ['Control'])
 	$Tarea.connect('button_down', self, '_on_button_down', ['Tarea'])
@@ -80,8 +82,19 @@ func _on_button_down(object: String) -> void:
 
 func _on_stream_finished(source, sound):
 	playing_action = false
+
+	match sound:
+		'Cepillo':
+			EventsMgr.emit_signal('play_requested', 'Actions', 'A')
+		'Tv':
+			EventsMgr.emit_signal('play_requested', 'Actions', 'B')
+		'Tarea':
+			EventsMgr.emit_signal('play_requested', 'Actions', 'C')
+		'Switch':
+			EventsMgr.emit_signal('play_requested', 'Actions', 'D')			
 	
-	if sound == 'Switch':
+	if sound == 'D':
+		EventsMgr.emit_signal('stop_requested', 'BG', 'Home')
 		if _days_left > 0:
 			EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.DOWNTOWN)
 		else:
