@@ -67,12 +67,14 @@ script = ExtResource( 1 )
 
 [node name="Cepillo" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 5 )
+volume_db = -2.0
 
 [node name="Switch" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 3 )
 
 [node name="Tv" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 4 )
+volume_db = -3.0
 
 [node name="Casi" type="Node2D" parent="VO/Main"]
 script = ExtResource( 9 )
@@ -126,6 +128,7 @@ stream = ExtResource( 2 )
 
 [node name="Tarea" type="AudioStreamPlayer" parent="VO/Girl"]
 stream = ExtResource( 6 )
+volume_db = -4.0
 
 [node name="Gracias" type="AudioStreamPlayer" parent="VO/Girl"]
 stream = ExtResource( 25 )
@@ -138,8 +141,14 @@ pitch_scale = 1.17
 
 [node name="Happy" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
+Weight = 100.0
 Volume = -10.0
+RandomVolume = true
 minVolume = -2.0
+maxVolume = 3.0
+RandomPitch = true
+minPitch = -2.0
+maxPitch = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Happy"]
 stream = ExtResource( 18 )
@@ -152,8 +161,14 @@ stream = ExtResource( 15 )
 
 [node name="Heart" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
+Weight = 100.0
 Volume = -10.0
-minVolume = -5.0
+RandomVolume = true
+minVolume = -2.0
+maxVolume = 3.0
+RandomPitch = true
+minPitch = -2.0
+maxPitch = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Heart"]
 stream = ExtResource( 14 )
@@ -163,8 +178,14 @@ stream = ExtResource( 17 )
 
 [node name="Angry" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
+Weight = 100.0
 Volume = -10.0
-minVolume = -5.0
+RandomVolume = true
+minVolume = -2.0
+maxVolume = 3.0
+RandomPitch = true
+minPitch = -2.0
+maxPitch = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Angry"]
 stream = ExtResource( 26 )
@@ -177,8 +198,14 @@ stream = ExtResource( 42 )
 
 [node name="Sad" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
+Weight = 100.0
 Volume = -10.0
-minVolume = -5.0
+RandomVolume = true
+minVolume = -2.0
+maxVolume = 3.0
+RandomPitch = true
+minPitch = -2.0
+maxPitch = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VO/Pedestrian/Sad"]
 stream = ExtResource( 22 )
@@ -210,7 +237,7 @@ stream = ExtResource( 31 )
 
 [node name="Radio" type="Node2D" parent="Objects"]
 script = ExtResource( 9 )
-Volume = -6.0
+Volume = -8.0
 
 [node name="Radio_01" type="AudioStreamPlayer" parent="Objects/Radio"]
 stream = ExtResource( 32 )

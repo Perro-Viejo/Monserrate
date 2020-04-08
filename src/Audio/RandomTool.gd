@@ -5,7 +5,9 @@ var index_sound = -1
 var select_sound
 var canplay
 
-export (float) var Volume = -1
+export (float) var Weight = 100
+
+export (float) var Volume = 0
 export (float) var Pitch = 0
 
 export (bool) var RandomVolume
@@ -16,8 +18,7 @@ export (bool) var RandomPitch
 export (float) var minPitch
 export (float) var maxPitch
 
-var avVolume = 0
-var ranVol = 0
+var avVolume
 var avPitch
 var dflt_values: Dictionary
 
@@ -32,37 +33,37 @@ func _ready():
 			'volume': sfx.get_volume_db()
 		}
 
-
 func play():
 	randomize()
 	
 	index_sound = randi()%get_child_count()
 	select_sound = get_child(index_sound)
-	avVolume = (select_sound.get_volume_db() + Volume)
+	avVolume = dflt_values[select_sound.name].volume + Volume
 #
-##	if RandomVolume == true:
-##		randomizeVol(avVolume, minVolume, maxVolume)
-##		select_sound.set_volume_db(avVolume + ranVol)
-#	else:
+	if RandomVolume == true:
+		randomizeVol(avVolume, minVolume, maxVolume)
+	else:
+		select_sound.set_volume_db(avVolume)
+#
+#
+	if randi()%100 <= Weight:
+		select_sound.play()
+		if RandomPitch == true:
+			randomizePitch(dflt_values[select_sound.name].pitch, minPitch, maxPitch)
+		else:
+			select_sound.set_pitch_scale(dflt_values[select_sound.name].pitch + Pitch)
 	
-#
-#
-#	if RandomPitch == true:
-#		select_sound.randomizePitch(avPitch, minPitch, maxPitch)
-#	#	select_sound.set_pitch_scale((Pitch) + ranPitch)
-#	else:
-	select_sound.play()
-	select_sound.set_volume_db(Volume)
-	select_sound.set_pitch_scale(dflt_values[select_sound.name].pitch + Pitch)
-	
-
 func stop():
 	select_sound.stop()
 
-func randomizeVol(_Volume, _minVolume, _maxVolume):
-	ranVol = (rand_range(_minVolume, _maxVolume+1))
 
-#func randomizePitch(_Pitch, minPitch, maxPitch):
-#		var ranPitch = (rand_range( minPitch + 1, (maxPitch+1)))
-#		if (_Pitch + ranPitch > 0):
-#			select_sound.set_pitch_scale((_Pitch + ranPitch))
+func randomizeVol(_Volume, minVolume, maxVolume):
+	var ranVol = (rand_range( minVolume, (maxVolume+1)))
+	print(ranVol)
+	select_sound.set_volume_db(_Volume + ranVol)
+
+func randomizePitch(_Pitch, minPitch, maxPitch):
+		var ranPitch = (rand_range( minPitch + 1, (maxPitch+1))/24)
+		if (_Pitch + ranPitch > 0):
+			select_sound.set_pitch_scale((_Pitch + ranPitch))
+

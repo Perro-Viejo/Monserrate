@@ -93,13 +93,14 @@ func _put_coin(area: Area2D) -> void:
 	if DataMgr.data_get(ConstantsMgr.DataIds.AUDIENCE) < 6 \
 		and randf() < _stingy_prob:
 		self._current_state = States.WATCHING
-
-		if rnd > 50:
-			$Emoticon.play('Heart')
-			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Heart')
-		else:
-			$Emoticon.play('Happy')
-			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Happy')
+		
+		if randi()%100 <= 85:
+			if rnd > 50:
+				$Emoticon.play('Heart')
+				EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Heart')
+			else:
+				$Emoticon.play('Happy')
+				EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Happy')
 		
 		# Hacer que los peatones se muevan un tilín si ya otro está viendo para
 		# que no se superpongan ───────────────────────────────────────────────┐
@@ -137,12 +138,13 @@ func _put_coin(area: Area2D) -> void:
 		# Aumentar el contador de expectadores
 		DataMgr.data_sumi(ConstantsMgr.DataIds.AUDIENCE, 1)
 	else:
-		if rnd > 50:
-			$Emoticon.play('Sad')
-			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Sad')
-		else:
-			$Emoticon.play('Angry')
-			EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
+		if randi()%100 <= 65:  
+			if rnd > 50:
+				$Emoticon.play('Sad')
+				EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Sad')
+			else:
+				$Emoticon.play('Angry')
+				EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
 
 
 func _calm_down(area: Area2D) -> void:
@@ -169,7 +171,6 @@ func _leave(quit: bool = false) -> void:
 		$Emoticon.play('Angry')
 		EventsMgr.emit_signal('play_requested', 'VO/Pedestrian', 'Angry')
 
-	$Emoticon.show()
 	_walk()
 
 	_disconnect()
