@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/TEMP/Fondo.png" type="Texture" id=1]
 [ext_resource path="res://src/scenes/Menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/PerroViejo_Logo TEMP.png" type="Texture" id=3]
+[ext_resource path="res://assets/NR.png" type="Texture" id=4]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource( 2 )
@@ -52,9 +53,9 @@ __meta__ = {
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = 10.1377
-margin_top = 171.65
-margin_right = 100.138
-margin_bottom = 219.65
+margin_top = 165.695
+margin_right = 111.138
+margin_bottom = 213.695
 text = "Mateo Robayo
 (Hizo una parte)
 "
@@ -62,11 +63,21 @@ align = 1
 
 [node name="Label2" type="Label" parent="Creditos"]
 margin_left = 175.803
-margin_top = 171.65
+margin_top = 165.695
 margin_right = 328.803
-margin_bottom = 202.65
+margin_bottom = 196.695
 text = "Juan Carlos García
 (Hizo la otra)"
+align = 1
+
+[node name="Label3" type="Label" parent="Creditos"]
+margin_left = 121.552
+margin_top = 205.63
+margin_right = 229.552
+margin_bottom = 236.63
+rect_scale = Vector2( 0.7, 0.7 )
+text = "Agradecimientos
+Especiales"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="Creditos"]
@@ -79,6 +90,21 @@ margin_right = 496.862
 margin_bottom = 287.663
 rect_scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NR" type="TextureRect" parent="Creditos"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 126.631
+margin_top = 169.235
+margin_right = 557.631
+margin_bottom = 444.235
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
