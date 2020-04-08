@@ -9,7 +9,7 @@ var _pedestrian_waiting: bool = false
 
 var radio_playing: bool = false
 var current_pose = ''
-var can_stand = true
+var can_stand = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	# Conectar escuchadores de señales
@@ -33,7 +33,8 @@ func set_current_state(state: int) -> void:
 			EventsMgr.emit_signal('play_requested', 'Robot', 'Gracias')
 		States.WAITING:
 			$Sprite.play('Stand')
-			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Stand')
+			if can_stand:
+				EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Stand')
 		States.SHAME:
 			$Sprite.play('Shame')
 			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Shame')
@@ -77,6 +78,8 @@ func _pose() -> void:
 
 
 func _play_pose(direction: int) -> void:
+	if can_stand == false:
+		can_stand = true
 	match direction:
 		ConstantsMgr.Arrow.LEFT:
 			$Sprite.play('Left')

@@ -10,6 +10,8 @@ func _ready():
 	else:
 		current_funds = 2000
 	print('Hay %d lucas en la marrana' % current_funds)
+	
+	EventsMgr.emit_signal('play_requested', 'BG', 'Store')
 
 	EventsMgr.emit_signal('play_requested', 'VO/Seller', 'Greet')
 	can_play = false
@@ -54,6 +56,7 @@ func _on_button_down(gift, cost):
 func _on_stream_finished(source, sound):
 	if sound == 'Sell' or buying_attempts == 3:
 		EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.ENDING)
+		EventsMgr.emit_signal('stop_requested', 'BG', 'Store')
 		EventsMgr.disconnect('stream_finished', self, '_on_stream_finished')
 	else:
 		can_play = true

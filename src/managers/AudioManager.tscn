@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada_04.ogg" type="AudioStream" id=2]
@@ -57,6 +57,9 @@
 [ext_resource path="res://assets/audio/SFX/SFX_Action_Switch.ogg" type="AudioStream" id=55]
 [ext_resource path="res://assets/audio/SFX/SFX_Action_TV.ogg" type="AudioStream" id=56]
 [ext_resource path="res://assets/audio/SFX/BG_Home.ogg" type="AudioStream" id=57]
+[ext_resource path="res://assets/audio/SFX/BG_Store.ogg" type="AudioStream" id=58]
+[ext_resource path="res://assets/audio/SFX/BG_Downtown.ogg" type="AudioStream" id=59]
+[ext_resource path="res://assets/audio/SFX/BG_Ending.ogg" type="AudioStream" id=60]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -105,9 +108,11 @@ stream = ExtResource( 13 )
 
 [node name="FelizCumple" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 23 )
+volume_db = -3.0
 
 [node name="Sad" type="AudioStreamPlayer" parent="VO/Main"]
 stream = ExtResource( 21 )
+volume_db = -3.0
 
 [node name="Jornada_Fin" type="Node2D" parent="VO/Main"]
 script = ExtResource( 9 )
@@ -132,16 +137,17 @@ volume_db = -4.0
 
 [node name="Gracias" type="AudioStreamPlayer" parent="VO/Girl"]
 stream = ExtResource( 25 )
+volume_db = -2.0
 
 [node name="TeQuiero" type="AudioStreamPlayer" parent="VO/Girl"]
 stream = ExtResource( 24 )
+volume_db = -2.0
 pitch_scale = 1.17
 
 [node name="Pedestrian" type="Node2D" parent="VO"]
 
 [node name="Happy" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Weight = 100.0
 Volume = -10.0
 RandomVolume = true
 minVolume = -2.0
@@ -161,7 +167,6 @@ stream = ExtResource( 15 )
 
 [node name="Heart" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Weight = 100.0
 Volume = -10.0
 RandomVolume = true
 minVolume = -2.0
@@ -178,7 +183,6 @@ stream = ExtResource( 17 )
 
 [node name="Angry" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Weight = 100.0
 Volume = -10.0
 RandomVolume = true
 minVolume = -2.0
@@ -198,7 +202,6 @@ stream = ExtResource( 42 )
 
 [node name="Sad" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Weight = 100.0
 Volume = -10.0
 RandomVolume = true
 minVolume = -2.0
@@ -318,3 +321,14 @@ stream = ExtResource( 52 )
 
 [node name="Home" type="AudioStreamPlayer" parent="BG"]
 stream = ExtResource( 57 )
+
+[node name="Downtown" type="AudioStreamPlayer" parent="BG"]
+stream = ExtResource( 59 )
+volume_db = -3.0
+
+[node name="Ending" type="AudioStreamPlayer" parent="BG"]
+stream = ExtResource( 60 )
+volume_db = -2.0
+
+[node name="Store" type="AudioStreamPlayer" parent="BG"]
+stream = ExtResource( 58 )

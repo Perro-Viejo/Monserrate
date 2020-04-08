@@ -12,10 +12,12 @@ func _ready() -> void:
 	EventsMgr.connect('performance_started', self, '_set_moving')
 	EventsMgr.connect('performance_finished', self, '_set_not_moving')
 	
+	EventsMgr.emit_signal('play_requested', 'BG', 'Downtown')
+	
 	# Iniciar la escena
 	_set_not_moving()
 	_trigger_tick()
-	EventsMgr.emit_signal('day_started', worktime * 60)
+	EventsMgr.emit_signal('day_started', worktime * 5)
 
 
 func spawn_pedestrian() -> void:
@@ -37,6 +39,7 @@ func spawn_pedestrian() -> void:
 func go_home() -> void:
 	EventsMgr.emit_signal('play_requested', 'VO/Main', 'Jornada_Fin')
 	EventsMgr.emit_signal('stop_requested', 'Objects', 'Radio')
+	EventsMgr.emit_signal('stop_requested', 'BG', 'Downtown')
 	yield(get_tree().create_timer(2), 'timeout')
 	EventsMgr.emit_signal('scene_changed', ConstantsMgr.Scenes.HOME)
 
