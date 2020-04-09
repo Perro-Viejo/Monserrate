@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://src/managers/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/VO_FinJornada_04.ogg" type="AudioStream" id=2]
@@ -60,6 +60,8 @@
 [ext_resource path="res://assets/audio/SFX/BG_Store.ogg" type="AudioStream" id=58]
 [ext_resource path="res://assets/audio/SFX/BG_Downtown.ogg" type="AudioStream" id=59]
 [ext_resource path="res://assets/audio/SFX/BG_Ending.ogg" type="AudioStream" id=60]
+[ext_resource path="res://assets/audio/MX/MX_Menu.ogg" type="AudioStream" id=61]
+[ext_resource path="res://assets/audio/MX/MX_Radio_03.ogg" type="AudioStream" id=62]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -240,13 +242,17 @@ stream = ExtResource( 31 )
 
 [node name="Radio" type="Node2D" parent="Objects"]
 script = ExtResource( 9 )
-Volume = -8.0
+Volume = -7.0
 
 [node name="Radio_01" type="AudioStreamPlayer" parent="Objects/Radio"]
 stream = ExtResource( 32 )
 
 [node name="Radio_02" type="AudioStreamPlayer" parent="Objects/Radio"]
 stream = ExtResource( 33 )
+
+[node name="Radio_03" type="AudioStreamPlayer" parent="Objects/Radio"]
+stream = ExtResource( 62 )
+volume_db = 5.0
 
 [node name="Robot" type="Node2D" parent="."]
 
@@ -281,6 +287,7 @@ volume_db = 2.0
 [node name="Coin" type="AudioStreamPlayer" parent="Robot"]
 stream = ExtResource( 41 )
 volume_db = -8.0
+pitch_scale = 1.2
 
 [node name="Gracias" type="Node2D" parent="Robot"]
 script = ExtResource( 9 )
@@ -332,3 +339,9 @@ volume_db = -2.0
 
 [node name="Store" type="AudioStreamPlayer" parent="BG"]
 stream = ExtResource( 58 )
+
+[node name="MX" type="Node2D" parent="."]
+
+[node name="Menu" type="AudioStreamPlayer" parent="MX"]
+stream = ExtResource( 61 )
+volume_db = -4.0
