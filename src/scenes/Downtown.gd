@@ -17,7 +17,7 @@ func _ready() -> void:
 	# Iniciar la escena
 	_set_not_moving()
 	_trigger_tick()
-	EventsMgr.emit_signal('day_started', worktime * 30)
+	EventsMgr.emit_signal('day_started', worktime * 40)
 
 
 func spawn_pedestrian() -> void:

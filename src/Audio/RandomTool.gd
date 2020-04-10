@@ -62,7 +62,6 @@ func stop():
 
 func randomizeVol(_Volume, minVolume, maxVolume):
 	var ranVol = (rand_range( minVolume, (maxVolume+1)))
-	print(ranVol)
 	select_sound.set_volume_db(_Volume + ranVol)
 
 func randomizePitch(_Pitch, minPitch, maxPitch):

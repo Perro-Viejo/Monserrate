@@ -31,6 +31,7 @@ func set_current_state(state: int) -> void:
 			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Bye')
 			yield(get_tree().create_timer(randf()*1), 'timeout')
 			EventsMgr.emit_signal('play_requested', 'Robot', 'Gracias')
+			current_pose = ''
 		States.WAITING:
 			$Sprite.play('Stand')
 			if can_stand:
@@ -38,6 +39,7 @@ func set_current_state(state: int) -> void:
 		States.SHAME:
 			$Sprite.play('Shame')
 			EventsMgr.emit_signal('play_requested', 'Robot', 'Pose_Shame')
+			current_pose = ''
 
 
 func _start_presentation(amount: float = 0.0) -> void:
@@ -65,6 +67,7 @@ func _say_bye(quit: bool = false) -> void:
 		self._current_state = States.SHAME
 		EventsMgr.emit_signal('stop_requested', 'Objects', 'Radio')
 		radio_playing = false
+		
 		
 	yield(get_tree().create_timer(cooldown), 'timeout')
 	_pose()

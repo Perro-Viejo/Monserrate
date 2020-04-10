@@ -150,7 +150,7 @@ pitch_scale = 1.17
 
 [node name="Happy" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Volume = -10.0
+Volume = -8.0
 RandomVolume = true
 minVolume = -2.0
 maxVolume = 3.0
@@ -169,7 +169,7 @@ stream = ExtResource( 15 )
 
 [node name="Heart" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Volume = -10.0
+Volume = -8.0
 RandomVolume = true
 minVolume = -2.0
 maxVolume = 3.0
@@ -185,7 +185,7 @@ stream = ExtResource( 17 )
 
 [node name="Angry" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Volume = -10.0
+Volume = -9.0
 RandomVolume = true
 minVolume = -2.0
 maxVolume = 3.0
@@ -204,7 +204,7 @@ stream = ExtResource( 42 )
 
 [node name="Sad" type="Node2D" parent="VO/Pedestrian"]
 script = ExtResource( 9 )
-Volume = -10.0
+Volume = -9.0
 RandomVolume = true
 minVolume = -2.0
 maxVolume = 3.0
@@ -242,7 +242,7 @@ stream = ExtResource( 31 )
 
 [node name="Radio" type="Node2D" parent="Objects"]
 script = ExtResource( 9 )
-Volume = -7.0
+Volume = -6.0
 
 [node name="Radio_01" type="AudioStreamPlayer" parent="Objects/Radio"]
 stream = ExtResource( 32 )
